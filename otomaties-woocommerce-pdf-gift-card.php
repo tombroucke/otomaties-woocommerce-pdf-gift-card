@@ -6,7 +6,7 @@
  * Author URI:      https://tombroucke.be
  * Text Domain:     otomaties-wc-giftcard
  * Domain Path:     /languages
- * Version:         1.1.0
+ * Version:         1.1.1
  *
  * @package         Core
  */
@@ -49,7 +49,7 @@ class Gift_Card_Controller
 	}
 
 	private function init() {
-		$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+		$myUpdateChecker = \Puc_v4_Factory::buildUpdateChecker(
 			'https://bitbucket.org/tombro/otomaties-woocommerce-pdf-gift-card',
 			__FILE__,
 			'otomaties-woocommerce-pdf-gift-card'
