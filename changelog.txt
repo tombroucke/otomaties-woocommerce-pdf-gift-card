@@ -1,0 +1,4 @@
+*** Otomaties WooCommerce PDF Gift Card ***
+
+2019.04.30 - version 1.2.0
+* Initial release

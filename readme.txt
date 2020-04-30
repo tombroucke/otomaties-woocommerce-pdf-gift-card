@@ -1,30 +1,33 @@
 === Otomaties Woocommerce Pdf Gift Card ===
 Contributors: Tom Broucke
 Donate link: https://example.com/
-Tags: comments, spam
-Requires at least: 4.5
-Tested up to: 4.9.9
-Stable tag: 0.1.0
+Tags: woocommerce, coupon, gift card, 
+Requires at least: 5.0
+Tested up to: 5.4.1
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Sell PDF gift cards through WooCommerce with a custom design.
 
-=== Description ===
+== Description ==
 
 Customise the PDF gift card in your custom theme or plugin.
 
-add_filter('gc_get_fields', function ($fields) {
+Disable custom message
+`add_filter('gc_get_fields', function ($fields) {
     unset($fields['_gc_message']);
     return $fields;
-});
+});`
 
-add_filter('gc_pdf_properties', function ($properties) {
+Add your own pdf background
+`add_filter('gc_pdf_properties', function ($properties) {
     $properties['template'] = App\asset_dir( 'files/gift_card.pdf' );
     return $properties;
-});
+});`
 
-add_filter('gc_pdf_fields', function ($fields, $gift_card) {
+Customize fields
+`add_filter('gc_pdf_fields', function ($fields, $gift_card) {
     $fields['data']['x'] = 29;
     $fields['data']['y'] = 58;
     $fields['content']['x'] = 29;
@@ -47,4 +50,5 @@ add_filter('gc_pdf_fields', function ($fields, $gift_card) {
     unset($fields['content']['fields']['message']);
     unset($fields['content']['fields']['message']);
     return $fields;
-}, 99, 2);
+}, 99, 2);`
+
