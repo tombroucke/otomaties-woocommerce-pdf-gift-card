@@ -16,19 +16,19 @@ Sell PDF gift cards through WooCommerce with a custom design.
 Customise the PDF gift card in your custom theme or plugin.
 
 Disable custom message
-`add_filter('gc_get_fields', function ($fields) {
+\`add_filter('gc_get_fields', function ($fields) {
     unset($fields['_gc_message']);
     return $fields;
-});`
+});\`
 
 Add your own pdf background
-`add_filter('gc_pdf_properties', function ($properties) {
+\`add_filter('gc_pdf_properties', function ($properties) {
     $properties['template'] = App\asset_dir( 'files/gift_card.pdf' );
     return $properties;
-});`
+});\`
 
 Customize fields
-`add_filter('gc_pdf_fields', function ($fields, $gift_card) {
+\`add_filter('gc_pdf_fields', function ($fields, $gift_card) {
     $fields['data']['x'] = 29;
     $fields['data']['y'] = 58;
     $fields['content']['x'] = 29;
@@ -51,7 +51,7 @@ Customize fields
     unset($fields['content']['fields']['message']);
     unset($fields['content']['fields']['message']);
     return $fields;
-}, 99, 2);`
+}, 99, 2);\`
 
 == Changelog ==
 
