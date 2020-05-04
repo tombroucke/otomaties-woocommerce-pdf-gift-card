@@ -6,7 +6,7 @@
  * Author URI:      https://tombroucke.be
  * Text Domain:     otomaties-wc-giftcard
  * Domain Path:     /languages
- * Version:         1.2.2
+ * Version:         1.2.0
  *
  * @package         Core
  */
@@ -51,13 +51,6 @@ class Gift_Card_Controller
 	}
 
 	private function init() {
-		$myUpdateChecker = \Puc_v4_Factory::buildUpdateChecker(
-			'https://github.com/tombroucke/otomaties-woocommerce-pdf-gift-card/',
-			__FILE__,
-			'otomaties-woocommerce-pdf-gift-card'
-		);
-		$myUpdateChecker->setBranch('master');
-
 		add_action( 'wp_enqueue_scripts', array($this, 'enqueue_scripts' ) );
 		add_filter( 'product_type_selector', array( $this, 'add_custom_products' ) );
 
