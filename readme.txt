@@ -5,7 +5,7 @@ Tags: woocommerce, coupon, gift card,
 Requires at least: 5.0
 Tested up to: 5.4.1
 Requires PHP: 7.2
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -57,5 +57,8 @@ Customize fields
 
 *** Otomaties WooCommerce PDF Gift Card ***
 
-2019.04.30 - version 1.2.0
+= 1.2.1 =
+* Remove vendor from repo
+
+= 1.2.0 =
 * Initial release
