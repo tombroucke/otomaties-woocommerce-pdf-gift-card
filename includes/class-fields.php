@@ -58,7 +58,7 @@ class WC_Custom_Gift_Card_Fields{
 
 		add_action( 'woocommerce_before_add_to_cart_button', array( $this, 'display_gift_card_fields' ), 15 );
 		add_filter( 'woocommerce_add_to_cart_validation', array( $this, 'validate_gift_card_fields' ), 10, 3 );
-		add_filter( 'woocommerce_add_cart_item_data', array( $this, 'save_gift_card_fields_to_cart_item_data' ), 10, 4 );
+		add_filter( 'woocommerce_add_cart_item_data', array( $this, 'save_gift_card_fields_to_cart_item_data' ), 10, 3 );
 		add_filter( 'woocommerce_cart_item_name', array( $this, 'set_gift_card_fields_label' ), 10, 3 );
 		add_action( 'woocommerce_checkout_create_order_line_item', array( $this, 'save_gift_card_fields_to_order' ), 10, 4 );
 
@@ -154,7 +154,7 @@ class WC_Custom_Gift_Card_Fields{
 
 	}
 
-	public function save_gift_card_fields_to_cart_item_data( $cart_item_data, $product_id, $variation_id, $quantity ) {
+	public function save_gift_card_fields_to_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
 
 		$product 	= wc_get_product($product_id);
 		$fields 	= $this->get_fields($product);
