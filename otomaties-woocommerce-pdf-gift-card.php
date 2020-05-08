@@ -34,7 +34,7 @@ class Gift_Card_Controller
 
 	private function includes()
 	{
-		require_once 'vendor/autoload';
+		require_once 'vendor/autoload.php';
 
 		include 'includes/class-admin.php';
 		include 'includes/class-custom-price.php';
