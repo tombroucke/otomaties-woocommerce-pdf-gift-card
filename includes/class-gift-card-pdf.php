@@ -98,7 +98,7 @@ class WC_Custom_Gift_Card_PDF
 							'margin_top' => 2.7
 						),
 						'message' => array(
-							'value' => $this->gift_card->get_message(),
+							'value' => preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $this->gift_card->get_message()),
 							'margin_top' => 2.7
 						),
 					)

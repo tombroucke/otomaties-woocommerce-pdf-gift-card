@@ -20,7 +20,7 @@ class WC_Custom_Gift_Card_Order{
 		$item_id 	= filter_input(INPUT_GET, 'download_gift_card', FILTER_VALIDATE_INT);
 		$order_id 	= filter_input(INPUT_GET, 'post', FILTER_VALIDATE_INT);
 
-		if( $item_id ){
+		if( $item_id && current_user_can( 'manage_woocommerce' ) ){
 			$order = new \WC_Order($order_id);
 
 			$items = $order->get_items();
@@ -30,7 +30,12 @@ class WC_Custom_Gift_Card_Order{
 				}
 				$gc = new WC_Custom_Gift_Card($item);
 				$pdf = new WC_Custom_Gift_Card_PDF($gc);
-				$pdf->download();
+				if( get_option( 'gc_debug' ) && get_option( 'gc_debug' ) == 'yes' ) {
+					$pdf->display();
+				}
+				else {
+					$pdf->download();
+				}
 				die();
 			}
 

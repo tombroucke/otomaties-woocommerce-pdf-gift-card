@@ -57,6 +57,12 @@ Customize fields
 
 *** Otomaties WooCommerce PDF Gift Card ***
 
+= 1.2.2 =
+* Bug fix
+* Check if user can manage_woocommerce before downloading gift card
+* Add settings page in WooCommerce->settings->products->gift card to enable debugging
+* Remove empty lines from message
+
 = 1.2.1 =
 * Bug fix
 
