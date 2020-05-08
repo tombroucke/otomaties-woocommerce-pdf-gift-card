@@ -34,9 +34,7 @@ class Gift_Card_Controller
 
 	private function includes()
 	{
-		if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
-			require __DIR__ . '/vendor/autoload.php';
-		}
+		require_once 'vendor/autoload';
 
 		include 'includes/class-admin.php';
 		include 'includes/class-custom-price.php';
@@ -52,6 +50,14 @@ class Gift_Card_Controller
 	}
 
 	private function init() {
+
+		$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+			'https://github.com/tombroucke/otomaties-woocommerce-pdf-gift-card',
+			__FILE__,
+			'otomaties-woocommerce-pdf-gift-card'
+		);
+		$myUpdateChecker->setBranch('puc');
+
 		add_action( 'wp_enqueue_scripts', array($this, 'enqueue_scripts' ) );
 		add_filter( 'product_type_selector', array( $this, 'add_custom_products' ) );
 

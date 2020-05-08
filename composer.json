@@ -11,6 +11,7 @@
     "require": {
         "composer/installers": "^1.0",
         "setasign/fpdf": "^1.8",
-        "setasign/fpdi": "^2.1"
+        "setasign/fpdi": "^2.1",
+        "yahnis-elsts/plugin-update-checker": "^4.9"
     }
 }
