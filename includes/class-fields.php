@@ -194,7 +194,7 @@ class WC_Custom_Gift_Card_Fields{
 					$value = wc_price($value);
 				}
 				if( $key == '_gc_message' ){
-					$value = wp_trim_words( $value, 8, '...' );
+					$value = wp_trim_words( $value, apply_filters( 'gc_message_preview_length', 8 ), '...' );
 				}
 				$name .= sprintf( '<br /><strong>%s</strong>: %s', $field['label'], $value );
 			}
