@@ -51,7 +51,7 @@ class Gift_Card_Controller
 
 	private function init() {
 
-		$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+		$myUpdateChecker = \Puc_v4_Factory::buildUpdateChecker(
 			'https://github.com/tombroucke/otomaties-woocommerce-pdf-gift-card',
 			__FILE__,
 			'otomaties-woocommerce-pdf-gift-card'
