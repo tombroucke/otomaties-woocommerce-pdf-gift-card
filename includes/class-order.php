@@ -110,7 +110,7 @@ class WC_Custom_Gift_Card_Order{
 			if( $key == '_gc_price' ){
 				$new_meta->display_value = wc_price(wc_get_order_item_meta($item->get_ID(), '_gc_price'));
 			}
-			if( $key == '_gc_message' ) {
+			if( $key == '_gc_message' && !is_admin() ) {
 				$new_meta->display_value = wp_trim_words( $new_meta->display_value, apply_filters( 'gc_message_preview_length', 8 ), '...' );
 			}
 			array_push($formatted_meta, $new_meta);
