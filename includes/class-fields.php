@@ -11,7 +11,7 @@ class WC_Custom_Gift_Card_Fields{
 			array(
 				'identifier' => '_gc_price',
 				'type' => 'number',
-				'maxlength' => 9999,
+				'maxlength' => 55,
 				'label' => __( 'Price', 'otomaties-wc-giftcard' ),
 				'placeholder' => _x( 'Price', 'label', 'otomaties-wc-giftcard' ),
 				'required' => true,
@@ -21,7 +21,7 @@ class WC_Custom_Gift_Card_Fields{
 			array(
 				'identifier' => '_gc_sender',
 				'type' => 'text',
-				'maxlength' => 9999,
+				'maxlength' => 55,
 				'label' => __( 'Your name', 'otomaties-wc-giftcard' ),
 				'placeholder' => _x( 'Your name', 'label', 'otomaties-wc-giftcard' ),
 				'required' => true,
@@ -30,7 +30,7 @@ class WC_Custom_Gift_Card_Fields{
 			array(
 				'identifier' => '_gc_recipient',
 				'type' => 'text',
-				'maxlength' => 9999,
+				'maxlength' => 55,
 				'label' => __( 'Recipient name', 'otomaties-wc-giftcard' ),
 				'placeholder' => _x( 'Recipient name', 'label', 'otomaties-wc-giftcard' ),
 				'required' => true,
@@ -39,7 +39,7 @@ class WC_Custom_Gift_Card_Fields{
 			array(
 				'identifier' => '_gc_message',
 				'type' => 'textarea',
-				'maxlength' => 9999,
+				'maxlength' => 200,
 				'label' => __( 'Message', 'otomaties-wc-giftcard' ),
 				'placeholder' => _x( 'Message', 'label', 'otomaties-wc-giftcard' ),
 				'required' => true,
@@ -59,7 +59,7 @@ class WC_Custom_Gift_Card_Fields{
 		add_action( 'woocommerce_before_add_to_cart_button', array( $this, 'display_gift_card_fields' ), 15 );
 		add_filter( 'woocommerce_add_to_cart_validation', array( $this, 'validate_gift_card_fields' ), 10, 3 );
 		add_filter( 'woocommerce_add_cart_item_data', array( $this, 'save_gift_card_fields_to_cart_item_data' ), 10, 3 );
-		add_filter( 'woocommerce_cart_item_name', array( $this, 'set_gift_card_fields_label' ), 10, 3 );
+		add_filter( 'woocommerce_cart_item_name', array( $this, 'set_gift_card_fields_display' ), 10, 3 );
 		add_action( 'woocommerce_checkout_create_order_line_item', array( $this, 'save_gift_card_fields_to_order' ), 10, 4 );
 
 	}
@@ -178,7 +178,7 @@ class WC_Custom_Gift_Card_Fields{
 
 	}
 
-	public function set_gift_card_fields_label( $name, $cart_item, $cart_item_key ) {
+	public function set_gift_card_fields_display( $name, $cart_item, $cart_item_key ) {
 
 		$product 	= wc_get_product($cart_item['product_id']);
 		$fields 	= $this->get_fields($product);
@@ -192,6 +192,9 @@ class WC_Custom_Gift_Card_Fields{
 				$value = esc_html( $cart_item[$key] );
 				if( $key == '_gc_price' ){
 					$value = wc_price($value);
+				}
+				if( $key == '_gc_message' ){
+					$value = wp_trim_words( $value, 8, '...' );
 				}
 				$name .= sprintf( '<br /><strong>%s</strong>: %s', $field['label'], $value );
 			}

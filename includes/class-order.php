@@ -11,7 +11,7 @@ class WC_Custom_Gift_Card_Order{
 		add_action( 'woocommerce_after_order_itemmeta', array($this,'download_link'), 10, 3 );
 		add_filter( 'woocommerce_order_item_get_formatted_meta_data', array( $this, 'custom_meta' ), 10, 2 );
 		add_filter(	'woocommerce_hidden_order_itemmeta', array( $this, 'hide_hidden_meta' ), 10, 1);
-		add_filter( 'gc_meta_value_gc_message', array( $this, 'shorten_message' ) );
+		add_filter( 'gc_meta_value_gc_message', array( $this, 'format_message' ) );
 
 	}
 
@@ -115,8 +115,8 @@ class WC_Custom_Gift_Card_Order{
 		return $formatted_meta;
 	}
 
-	public function shorten_message( $value ) {
-		return wp_trim_words( $value, 4, ' ...' );
+	public function format_message( $value ) {
+		return wpautop( $value );
 	}
 }
 $wc_gift_card_order = new WC_Custom_Gift_Card_Order();
