@@ -1,4 +1,20 @@
 *** Otomaties WooCommerce PDF Gift Card ***
 
-2019.04.30 - version 1.2.0
+= 1.2.4 =
+* Check if WooCommerce is active to avoid fatal error
+
+= 1.2.3 =
+* Default maxlength
+* Trim message in cart & checkout, not in admin
+
+= 1.2.2 =
+* Bug fix
+* Check if user can manage_woocommerce before downloading gift card
+* Add settings page in WooCommerce->settings->products->gift card to enable debugging
+* Remove empty lines from message
+
+= 1.2.1 =
+* Bug fix
+
+= 1.2.0 =
 * Initial release
