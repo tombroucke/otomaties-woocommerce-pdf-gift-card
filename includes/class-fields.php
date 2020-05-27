@@ -184,7 +184,7 @@ class WC_Custom_Gift_Card_Fields{
 		$fields 	= $this->get_fields($product);
 
 		if( !in_array( $product->get_type(), Gift_Card_Controller::gift_card_products() ) ){
-			return $name;
+			return $item_data;
 		}
 
 		foreach ( $fields as $key => $field) {
