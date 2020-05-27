@@ -1,5 +1,8 @@
 *** Otomaties WooCommerce PDF Gift Card ***
 
+= 1.2.5 =
+* Better way to display meta in backend, without duplicating gift card meta
+
 = 1.2.4 =
 * Check if WooCommerce is active to avoid fatal error
 

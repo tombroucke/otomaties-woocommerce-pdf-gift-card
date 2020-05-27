@@ -9,8 +9,6 @@ class WC_Custom_Gift_Card_Order{
 		add_filter( 'woocommerce_order_item_display_meta_key', array( $this, 'change_labels' ) );
 		add_filter( 'woocommerce_order_item_display_meta_value', array( $this, 'change_values' ), 10, 3 );
 		add_action( 'woocommerce_after_order_itemmeta', array($this,'download_link'), 10, 3 );
-		add_filter( 'woocommerce_order_item_get_formatted_meta_data', array( $this, 'custom_meta' ), 10, 2 );
-		add_filter(	'woocommerce_hidden_order_itemmeta', array( $this, 'hide_hidden_meta' ), 10, 1);
 		add_filter( 'gc_meta_value_gc_message', array( $this, 'format_message' ) );
 
 	}
@@ -47,12 +45,21 @@ class WC_Custom_Gift_Card_Order{
 
 		$fields_obj = new WC_Custom_Gift_Card_Fields();
 		$fields 	= $fields_obj->get_fields();
-		$fields['_gc_expiration'] = array(
-			'label' => __('Expiration date', 'otomaties-wc-giftcard')
+
+		$other_labels = array(
+			'_gc_coupon' => __('Coupon', 'otomaties-wc-giftcard'),
+			'_gc_mailed' => __('Mailed', 'otomaties-wc-giftcard'),
+			'_gc_expiration' => __('Expiration date', 'otomaties-wc-giftcard')
 		);
+
+		foreach ($other_labels as $key => $label) {
+			$fields[$key] = array( 'label' => $label );
+		}
+
 		if( isset($fields[$meta_key]) && isset($fields[$meta_key]['label']) ){
 			return $fields[$meta_key]['label'];
 		}
+
 		return $meta_key;
 
 	}
@@ -61,6 +68,9 @@ class WC_Custom_Gift_Card_Order{
 
 		if( $meta->key == '_gc_expiration' ){
 			$display_value = date('d-m-Y', $meta->value);
+		}
+		elseif( $meta->key == '_gc_coupon' ){
+			$display_value = sprintf( '<a target="_blank" href="%s">%s</a>', get_edit_post_link( $meta->value ), $meta->value );
 		}
 		return $display_value;
 
@@ -74,48 +84,6 @@ class WC_Custom_Gift_Card_Order{
 			<?php
 		}
 
-	}
-
-	public function hide_hidden_meta($arr){
-		$fields_obj = new WC_Custom_Gift_Card_Fields();
-		$fields 	= $fields_obj->get_fields();
-		foreach ($fields as $key => $field) {
-			$arr[] = $key;
-		}
-    	return $arr;
-	}
-
-	public function custom_meta($formatted_meta, $item){
-
-		if( get_class($item) != 'WC_Order_Item_Product' ){
-			return $formatted_meta;
-		}
-		$product_id = $item->get_product_id();
-		$product = wc_get_product( $product_id );
-		if( !in_array( $product->get_type(), Gift_Card_Controller::gift_card_products() ) ){
-			return $formatted_meta;
-		}
-		$fields_obj = new WC_Custom_Gift_Card_Fields($product);
-		$fields 	= $fields_obj->get_fields($product);
-		foreach ($fields as $key => $field) {
-			if( !is_admin() && ( !$field->display() || !wc_get_order_item_meta($item->get_ID(), $key) ) ){
-				continue;
-			}
-			$new_meta = (object) array(
-				'key' => ltrim($key, '_'),
-				'value' => wc_get_order_item_meta($item->get_ID(), $key),
-				'display_key' => $field['label'],
-				'display_value' => apply_filters( 'gc_meta_value_' . ltrim($key, '_') , wc_get_order_item_meta($item->get_ID(), $key) )
-			);
-			if( $key == '_gc_price' ){
-				$new_meta->display_value = wc_price(wc_get_order_item_meta($item->get_ID(), '_gc_price'));
-			}
-			if( $key == '_gc_message' && !is_admin() ) {
-				$new_meta->display_value = wp_trim_words( $new_meta->display_value, apply_filters( 'gc_message_preview_length', 8 ), '...' );
-			}
-			array_push($formatted_meta, $new_meta);
-		}
-		return $formatted_meta;
 	}
 
 	public function format_message( $value ) {
