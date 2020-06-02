@@ -5,7 +5,7 @@ Tags: woocommerce, coupon, gift card,
 Requires at least: 5.0
 Tested up to: 5.4.1
 Requires PHP: 7.2
-Stable tag: 1.2.5
+Stable tag: 1.2.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,6 +56,9 @@ Customize fields
 == Changelog ==
 
 *** Otomaties WooCommerce PDF Gift Card ***
+
+= 1.2.6 =
+* Added FR translation
 
 = 1.2.5 =
 * Better way to display meta in backend, without duplicating gift card meta
