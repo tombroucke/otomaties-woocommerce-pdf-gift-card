@@ -218,32 +218,6 @@ class WC_Custom_Gift_Card_Fields{
 		$fields = $this->get_fields($product);
 		$fields['_gc_expiration'] = '';
 
-		if( apply_filters('gc_create_coupon', true, $item) ){
-			$coupon_code = strtolower(str_pad(substr($values['_gc_recipient'], 0, 5), 5, 'X') . '_' . substr(md5(uniqid(rand(), true)), 0, 5));
-			$amount = round($item->get_total() + $item->get_total_tax(), 2);
-			$discount_type = 'fixed_cart';
-
-			$coupon = array(
-				'post_title' 	=> $coupon_code,
-				'post_content' 	=> '',
-				'post_status' 	=> 'publish',
-				'post_type' 	=> 'shop_coupon'
-			);
-
-			$new_coupon_id = wp_insert_post( $coupon );
-			$item->add_meta_data( '_gc_coupon', $new_coupon_id );
-
-			update_post_meta( $new_coupon_id, 'discount_type', $discount_type );
-			update_post_meta( $new_coupon_id, 'coupon_amount', $amount );
-			update_post_meta( $new_coupon_id, 'individual_use', 'no' );
-			update_post_meta( $new_coupon_id, 'product_ids', '' );
-			update_post_meta( $new_coupon_id, 'exclude_product_ids', '' );
-			update_post_meta( $new_coupon_id, 'usage_limit', '1' );
-			update_post_meta( $new_coupon_id, 'date_expires',  $values['_gc_expiration']);
-			update_post_meta( $new_coupon_id, 'apply_before_tax', 'yes' );
-			update_post_meta( $new_coupon_id, 'free_shipping', 'no' );
-		}
-
 		foreach ( $fields as $key => $field) {
 			if ( !empty( $values[$key] ) ) {
 				$item->add_meta_data( $key, $values[$key] );

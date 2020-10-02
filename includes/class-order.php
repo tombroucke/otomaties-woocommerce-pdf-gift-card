@@ -16,6 +16,7 @@ class WC_Custom_Gift_Card_Order{
 	public function download_gift_card(){
 
 		$item_id 	= filter_input(INPUT_GET, 'download_gift_card', FILTER_VALIDATE_INT);
+		$index 		= filter_input(INPUT_GET, 'index', FILTER_VALIDATE_INT);
 		$order_id 	= filter_input(INPUT_GET, 'post', FILTER_VALIDATE_INT);
 
 		if( $item_id && current_user_can( 'manage_woocommerce' ) ){
@@ -26,7 +27,7 @@ class WC_Custom_Gift_Card_Order{
 				if( $key != $item_id ){
 					continue;
 				}
-				$gc = new WC_Custom_Gift_Card($item);
+				$gc = new WC_Custom_Gift_Card($item, $index);
 				$pdf = new WC_Custom_Gift_Card_PDF($gc);
 				if( get_option( 'gc_debug' ) && get_option( 'gc_debug' ) == 'yes' ) {
 					$pdf->display();
@@ -77,11 +78,15 @@ class WC_Custom_Gift_Card_Order{
 	}
 
 	public function download_link($item_id, $item, $product){
-		$url = add_query_arg( 'download_gift_card', $item_id, get_edit_post_link( get_the_ID() ) );
-		if ( $item instanceof \WC_Order_Item_Product && ( wc_get_order_item_meta($item_id, '_gc_sender') || wc_get_order_item_meta($item_id, '_gc_receiver') )) {
-			?>
-			<a class="button button-secondary" href="<?php echo $url; ?>" target="_blank"><?php _e( 'Download gift card', 'otomaties-wc-giftcard' ); ?></a>
-			<?php
+		$order = new \WC_Order( get_the_ID() );
+		if ( $order->get_status() == 'completed' && $item instanceof \WC_Order_Item_Product && wc_get_order_item_meta($item_id, '_gc_price') ) {
+			$url = add_query_arg( 'download_gift_card', $item_id, get_edit_post_link( $order->get_ID() ) );
+			for ($i=0; $i < $item->get_quantity(); $i++) {
+				$url = add_query_arg( 'index', $i, $url );
+				?>
+				<a class="button button-secondary" href="<?php echo $url; ?>" target="_blank"><?php _e( 'Download gift card', 'otomaties-wc-giftcard' ); ?></a>
+				<?php
+			}
 		}
 
 	}
