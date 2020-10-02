@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Woocommerce PDF Gift Card\n"
-"POT-Creation-Date: 2020-05-08 08:12+0200\n"
+"POT-Creation-Date: 2020-10-02 17:20+0200\n"
 "PO-Revision-Date: 2020-04-27 13:15+0200\n"
 "Last-Translator: Tom Broucke <tom@tombrouckeBe>\n"
 "Language-Team: Tom Broucke <tom@tombrouckeBe>\n"
@@ -87,24 +87,52 @@ msgstr ""
 msgid "The minimum price for %s is %s"
 msgstr ""
 
-#: includes/class-gift-card-pdf.php:34
+#: includes/class-gift-card-pdf.php:37
 msgid "gift_card"
 msgstr ""
 
-#: includes/class-gift-card-pdf.php:111
+#: includes/class-gift-card-pdf.php:114
 #, php-format
 msgid "Valid untill %s"
 msgstr ""
 
-#: includes/class-handle-checkout.php:46
+#: includes/class-handle-checkout.php:80
+msgid "Dear,"
+msgstr ""
+
+#: includes/class-handle-checkout.php:81
+msgid "Your gift card is attached to this e-mail."
+msgstr ""
+
+#: includes/class-handle-checkout.php:81
+msgid "Your gift cards are attached to this e-mail."
+msgstr ""
+
+#: includes/class-handle-checkout.php:82
+msgid "Kind regards,"
+msgstr ""
+
+#: includes/class-handle-checkout.php:85
 msgid "Your gift card"
 msgstr ""
 
-#: includes/class-order.php:51 includes/class-product-gift-card.php:60
+#: includes/class-handle-checkout.php:85
+msgid "Your gift cards"
+msgstr ""
+
+#: includes/class-order.php:51
+msgid "Coupon"
+msgstr ""
+
+#: includes/class-order.php:52
+msgid "Mailed"
+msgstr ""
+
+#: includes/class-order.php:53 includes/class-product-gift-card.php:60
 msgid "Expiration date"
 msgstr ""
 
-#: includes/class-order.php:73
+#: includes/class-order.php:87
 msgid "Download gift card"
 msgstr ""
 
@@ -154,11 +182,11 @@ msgstr ""
 msgid "Gift card expires in ..."
 msgstr ""
 
-#: otomaties-woocommerce-pdf-gift-card.php:75
+#: otomaties-woocommerce-pdf-gift-card.php:76
 msgid "Gift card"
 msgstr ""
 
-#: otomaties-woocommerce-pdf-gift-card.php:76
+#: otomaties-woocommerce-pdf-gift-card.php:77
 msgid "Variable Gift card"
 msgstr ""
 
