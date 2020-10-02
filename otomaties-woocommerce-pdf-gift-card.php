@@ -34,6 +34,11 @@ class Gift_Card_Controller
 
 	private function includes()
 	{
+
+		if( file_exists( dirname(__FILE__) . '/vendor' ) ) {
+			include 'vendor/autoload.php';
+		}
+
 		include 'includes/class-admin.php';
 		include 'includes/class-custom-price.php';
 		include 'includes/class-field.php';
