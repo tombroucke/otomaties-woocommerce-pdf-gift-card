@@ -1,21 +1,23 @@
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Project-Id-Version: Woocommerce PDF Gift Card\n"
-"POT-Creation-Date: 2020-05-08 08:12+0200\n"
-"PO-Revision-Date: 2020-06-02 12:00+0200\n"
+"POT-Creation-Date: 2020-10-02 17:21+0200\n"
+"PO-Revision-Date: 2020-10-02 17:21+0200\n"
+"Last-Translator: Tom Broucke <tom@tombrouckeBe>\n"
 "Language-Team: Tom Broucke <tom@tombrouckeBe>\n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.1.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: otomaties-woocommerce-pdf-gift-card.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"Last-Translator: Tom Broucke <tom@tombrouckeBe>\n"
-"Language: fr_FR\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
@@ -85,24 +87,52 @@ msgstr "%s est obligatoire."
 msgid "The minimum price for %s is %s"
 msgstr "Le prix minimum pour %s est %s"
 
-#: includes/class-gift-card-pdf.php:34
+#: includes/class-gift-card-pdf.php:37
 msgid "gift_card"
 msgstr "carte_cadeau"
 
-#: includes/class-gift-card-pdf.php:111
+#: includes/class-gift-card-pdf.php:114
 #, php-format
 msgid "Valid untill %s"
 msgstr "Valide jusqu’à le %s"
 
-#: includes/class-handle-checkout.php:46
+#: includes/class-handle-checkout.php:80
+msgid "Dear,"
+msgstr "Cher,"
+
+#: includes/class-handle-checkout.php:81
+msgid "Your gift card is attached to this e-mail."
+msgstr "Votre carte-cadeau est jointe à cet e-mail."
+
+#: includes/class-handle-checkout.php:81
+msgid "Your gift cards are attached to this e-mail."
+msgstr "Vos cartes-cadeaux sont jointes à cet e-mail."
+
+#: includes/class-handle-checkout.php:82
+msgid "Kind regards,"
+msgstr "Sincères salutations."
+
+#: includes/class-handle-checkout.php:85
 msgid "Your gift card"
 msgstr "Votre carte cadeau"
 
-#: includes/class-order.php:51 includes/class-product-gift-card.php:60
+#: includes/class-handle-checkout.php:85
+msgid "Your gift cards"
+msgstr "Vos cartes-cadeaux"
+
+#: includes/class-order.php:51
+msgid "Coupon"
+msgstr "Code promo"
+
+#: includes/class-order.php:52
+msgid "Mailed"
+msgstr "Envoyé"
+
+#: includes/class-order.php:53 includes/class-product-gift-card.php:60
 msgid "Expiration date"
 msgstr "Date d’expiration"
 
-#: includes/class-order.php:73
+#: includes/class-order.php:87
 msgid "Download gift card"
 msgstr "Télécharger carte-cadeau"
 
@@ -152,11 +182,11 @@ msgstr "2.5 ans"
 msgid "Gift card expires in ..."
 msgstr "Carte-cadeau expire en ..."
 
-#: otomaties-woocommerce-pdf-gift-card.php:75
+#: otomaties-woocommerce-pdf-gift-card.php:76
 msgid "Gift card"
 msgstr "Carte cadeau"
 
-#: otomaties-woocommerce-pdf-gift-card.php:76
+#: otomaties-woocommerce-pdf-gift-card.php:77
 msgid "Variable Gift card"
 msgstr "Carte-cadeau variable"
 
@@ -166,7 +196,9 @@ msgstr "Carte-cadeau PDF Woocommerce"
 
 #. Description of the plugin/theme
 msgid "Sell PDF gift cards through WooCommerce with a custom design."
-msgstr "Vendez des cartes-cadeaux PDF par l’intermédiaire de WooCommerce avec un design personnalisé."
+msgstr ""
+"Vendez des cartes-cadeaux PDF par l’intermédiaire de WooCommerce avec un "
+"design personnalisé."
 
 #. Author of the plugin/theme
 msgid "Tom Broucke"

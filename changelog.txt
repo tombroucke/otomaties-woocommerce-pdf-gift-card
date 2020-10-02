@@ -1,5 +1,10 @@
 *** Otomaties WooCommerce PDF Gift Card ***
 
+= 1.2.7 =
+* Support for multiple gift cards
+* Email content
+* Disable creation of gift card on thank you page
+
 = 1.2.6 =
 * Added FR translation
 

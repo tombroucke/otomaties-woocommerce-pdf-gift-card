@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Woocommerce PDF Gift Card\n"
-"POT-Creation-Date: 2020-05-08 08:12+0200\n"
-"PO-Revision-Date: 2020-05-08 08:13+0200\n"
+"POT-Creation-Date: 2020-10-02 17:20+0200\n"
+"PO-Revision-Date: 2020-10-02 17:21+0200\n"
 "Last-Translator: Tom Broucke <tom@tombrouckeBe>\n"
 "Language-Team: Tom Broucke <tom@tombrouckeBe>\n"
 "Language: nl_NL\n"
@@ -87,24 +87,52 @@ msgstr "%s is verplicht."
 msgid "The minimum price for %s is %s"
 msgstr "De minimumprijs voor %s is %s"
 
-#: includes/class-gift-card-pdf.php:34
+#: includes/class-gift-card-pdf.php:37
 msgid "gift_card"
 msgstr "cadeaubon"
 
-#: includes/class-gift-card-pdf.php:111
+#: includes/class-gift-card-pdf.php:114
 #, php-format
 msgid "Valid untill %s"
 msgstr "Geldig tot %s"
 
-#: includes/class-handle-checkout.php:46
+#: includes/class-handle-checkout.php:80
+msgid "Dear,"
+msgstr "Beste,"
+
+#: includes/class-handle-checkout.php:81
+msgid "Your gift card is attached to this e-mail."
+msgstr "Uw cadeaubon zit in bijlage bij deze e-mail."
+
+#: includes/class-handle-checkout.php:81
+msgid "Your gift cards are attached to this e-mail."
+msgstr "Uw cadeaubonnen zitten in bijlage bij deze e-mail."
+
+#: includes/class-handle-checkout.php:82
+msgid "Kind regards,"
+msgstr "Met vriendelijke groeten,"
+
+#: includes/class-handle-checkout.php:85
 msgid "Your gift card"
 msgstr "Uw cadeaubon"
 
-#: includes/class-order.php:51 includes/class-product-gift-card.php:60
+#: includes/class-handle-checkout.php:85
+msgid "Your gift cards"
+msgstr "Uw cadeaubonnen"
+
+#: includes/class-order.php:51
+msgid "Coupon"
+msgstr "Kortingsbon"
+
+#: includes/class-order.php:52
+msgid "Mailed"
+msgstr "Gemaild"
+
+#: includes/class-order.php:53 includes/class-product-gift-card.php:60
 msgid "Expiration date"
 msgstr "Vervaldatum"
 
-#: includes/class-order.php:73
+#: includes/class-order.php:87
 msgid "Download gift card"
 msgstr "Download cadeaubon"
 
@@ -154,11 +182,11 @@ msgstr "2,5 jaar"
 msgid "Gift card expires in ..."
 msgstr "Cadeaubon vervalt binnen …"
 
-#: otomaties-woocommerce-pdf-gift-card.php:75
+#: otomaties-woocommerce-pdf-gift-card.php:76
 msgid "Gift card"
 msgstr "Cadeaubon"
 
-#: otomaties-woocommerce-pdf-gift-card.php:76
+#: otomaties-woocommerce-pdf-gift-card.php:77
 msgid "Variable Gift card"
 msgstr "Variabele cadeaubon"
 
@@ -177,9 +205,6 @@ msgstr "Tom Broucke"
 #. Author URI of the plugin/theme
 msgid "https://tombroucke.be"
 msgstr "https://tombroucke.be"
-
-#~ msgid "Create coupon"
-#~ msgstr "Kortingsbon aanmaken"
 
 #~ msgctxt "label"
 #~ msgid "Create coupon"
