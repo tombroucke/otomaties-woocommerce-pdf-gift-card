@@ -1,5 +1,8 @@
 *** Otomaties WooCommerce PDF Gift Card ***
 
+= 1.2.8 =
+* Added backward compatibility
+
 = 1.2.7 =
 * Support for multiple gift cards
 * Email content
