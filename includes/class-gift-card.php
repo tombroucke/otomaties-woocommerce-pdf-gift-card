@@ -25,6 +25,10 @@ class WC_Custom_Gift_Card {
 		return $this->order_item;
 	}
 
+	public function get_order_item_id() {
+		return $this->order_item->get_ID();
+	}
+
 	public function get_product_id() {
 		return $this->order_item->get_product_id();
 	}
