@@ -61,6 +61,10 @@ class WC_Custom_Gift_Card_Order{
 			return $fields[$meta_key]['label'];
 		}
 
+		if( strpos($meta_key, '_gc_coupon') !== false ){
+			return $fields['_gc_coupon']['label'];
+		}
+
 		return $meta_key;
 
 	}
@@ -70,9 +74,10 @@ class WC_Custom_Gift_Card_Order{
 		if( $meta->key == '_gc_expiration' ){
 			$display_value = date('d-m-Y', $meta->value);
 		}
-		elseif( $meta->key == '_gc_coupon' ){
+		elseif( strpos($meta->key, '_gc_coupon') !== false ){
 			$display_value = sprintf( '<a target="_blank" href="%s">%s</a>', get_edit_post_link( $meta->value ), $meta->value );
 		}
+
 		return $display_value;
 
 	}

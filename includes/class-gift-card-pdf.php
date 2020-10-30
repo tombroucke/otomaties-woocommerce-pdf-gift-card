@@ -34,7 +34,7 @@ class WC_Custom_Gift_Card_PDF {
 		// Set upload dir
 		$wp_upload_dir      = wp_upload_dir();
 		$this->upload_dir   = trailingslashit( $wp_upload_dir['basedir'] ) . 'gift_cards/';
-		$this->filename     = __( 'gift_card', 'otomaties-wc-giftcard' ) . '-' . $this->gift_card->get_order_id() . '_' . $this->gift_card->index() . '.pdf';
+		$this->filename     = __( 'gift_card', 'otomaties-wc-giftcard' ) . '-' . $this->gift_card->get_order_id() . '-' . $this->gift_card->get_order_item_id() . '_' . $this->gift_card->index() . '.pdf';
 		if ( ! file_exists( $this->upload_dir ) ) {
 			mkdir( $this->upload_dir, 0755, true );
 		}
