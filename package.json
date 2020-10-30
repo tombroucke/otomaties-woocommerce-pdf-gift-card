@@ -1,7 +1,7 @@
 
 {
   "name": "woocommerce-pdf-gift-card",
-  "version": "1.2.5",
+  "version": "1.2.9",
   "main": "Gruntfile.js",
   "author": "Tom Broucke",
   "devDependencies": {
