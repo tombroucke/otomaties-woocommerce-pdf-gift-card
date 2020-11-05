@@ -54,6 +54,8 @@ class WC_Custom_Gift_Card_PDF {
 		$this->pdf->AddFont( 'Lato', 'B', 'Lato-Bold.php' );
 		$this->pdf->SetAutoPageBreak( false, 0 );
 
+		do_action( 'gc_pdf_before_pdf', $this->pdf );
+
 		$pagecount = $this->pdf->setSourceFile( $this->properties['template'] );
 		for ( $pageNo = 1; $pageNo <= $pagecount; $pageNo++ ) {
 			$tplIdx = $this->pdf->importPage( $pageNo );
@@ -63,7 +65,7 @@ class WC_Custom_Gift_Card_PDF {
 			$this->pdf->SetFont( 'Arial' );
 			$this->pdf->SetFontSize( 11 );
 
-			$default_field = array(
+			$default_field = apply_filters( 'gc_pdf_default_field', array(
 				'font' => array( 'Lato', '', 10 ),
 				'x' => -1,
 				'y' => -1,
@@ -75,7 +77,7 @@ class WC_Custom_Gift_Card_PDF {
 				'color' => array( 35, 31, 32 ),
 				'align' => 'L',
 				'margin_top' => 0,
-			);
+			) );
 
 			$pdf_fields = array(
 				'data' => array(
@@ -126,9 +128,7 @@ class WC_Custom_Gift_Card_PDF {
 			}
 
 			$field_groups = apply_filters( 'gc_pdf_fields', $pdf_fields, $this->gift_card );
-
 			foreach ( $field_groups as $key => $field_group ) {
-
 				$this->pdf->setXY( $field_group['x'], $field_group['y'] );
 
 				foreach ( $field_group['fields'] as $key => $field ) {
