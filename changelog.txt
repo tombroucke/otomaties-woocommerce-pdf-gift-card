@@ -1,5 +1,8 @@
 *** Otomaties WooCommerce PDF Gift Card ***
 
+= 1.3.0 =
+* Use same gift card multiple times until amount is 0
+
 = 1.2.9 =
 * Multiple gift cards in email
 

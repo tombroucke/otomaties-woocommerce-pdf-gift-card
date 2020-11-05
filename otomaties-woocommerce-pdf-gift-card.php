@@ -6,7 +6,7 @@
  * Author URI:      https://tombroucke.be
  * Text Domain:     otomaties-wc-giftcard
  * Domain Path:     /languages
- * Version:         1.2.9
+ * Version:         1.3.0
  *
  * @package         Core
  */
