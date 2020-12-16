@@ -22,7 +22,7 @@ class WC_Custom_Gift_Card_Handle_Checkout {
 		foreach ( $order->get_items() as $key => $item ) {
 			$product_id = $item->get_product_id();
 			$product = wc_get_product( $product_id );
-			if ( ! in_array( $product->get_type(), Gift_Card_Controller::gift_card_products() ) ) {
+			if ( ! $product || ! in_array( $product->get_type(), Gift_Card_Controller::gift_card_products() ) ) {
 				$autocomplete = false;
 			}
 		}
