@@ -47,7 +47,7 @@ class WC_Custom_Gift_Card_Handle_Checkout {
 			for ($i=0; $i < $item->get_quantity(); $i++) { 
 				if ( apply_filters( 'gc_create_coupon', true, $item ) && ! wc_get_order_item_meta( $key, '_gc_coupon_' . $i, true ) ) {
 					$coupon_code = strtolower( str_pad( substr( wc_get_order_item_meta( $key, '_gc_recipient', true ), 0, 5 ), 5, 'X' ) . '_' . substr( md5( uniqid( rand(), true ) ), 0, 5 ) );
-					$amount = round( $item->get_total() + $item->get_total_tax(), 2 );
+					$amount = round( ( $item->get_total() + $item->get_total_tax() ) / $item->get_quantity() , 2 );
 					$discount_type = 'fixed_cart';
 
 					$coupon = array(
@@ -66,7 +66,7 @@ class WC_Custom_Gift_Card_Handle_Checkout {
 					update_post_meta( $new_coupon_id, 'individual_use', 'no' );
 					update_post_meta( $new_coupon_id, 'product_ids', '' );
 					update_post_meta( $new_coupon_id, 'exclude_product_ids', '' );
-					update_post_meta( $new_coupon_id, 'usage_limit', '-1' );
+					update_post_meta( $new_coupon_id, 'usage_limit', '1' );
 					update_post_meta( $new_coupon_id, 'date_expires', wc_get_order_item_meta( $key, '_gc_expiration', true ) );
 					update_post_meta( $new_coupon_id, 'apply_before_tax', 'yes' );
 					update_post_meta( $new_coupon_id, 'free_shipping', 'no' );

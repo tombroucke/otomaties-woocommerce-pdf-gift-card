@@ -42,11 +42,11 @@ class WC_Custom_Gift_Card {
 	}
 
 	public function get_amount() {
-		return round( $this->order_item->get_total(), 2 );
+		return round( $this->order_item->get_total(), 2 ) / $this->order_item->get_quantity();
 	}
 
 	public function get_amount_incl_tax() {
-		return round( $this->order_item->get_total() + $this->order_item->get_total_tax(), 2 );
+		return round( $this->order_item->get_total() + $this->order_item->get_total_tax(), 2 ) / $this->order_item->get_quantity();
 	}
 
 	public function get_recipient() {

@@ -86,7 +86,7 @@ class WC_Custom_Gift_Card_PDF {
 					'fields' => array(
 						'amount' => array(
 							'font' => array( 'Lato', 'B', 25 ),
-							'value' => html_entity_decode( wp_strip_all_tags( wc_price( $this->gift_card->get_amount_incl_tax() ) ) ),
+							'value' => str_replace( ',00', '', html_entity_decode( wp_strip_all_tags( wc_price( $this->gift_card->get_amount_incl_tax() ) ) ) ),
 							'color' => array( 209, 32, 39 ),
 						),
 					),
