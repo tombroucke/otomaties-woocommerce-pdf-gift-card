@@ -1,0 +1,205 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Woocommerce PDF Gift Card\n"
+"POT-Creation-Date: 2020-10-02 17:20+0200\n"
+"PO-Revision-Date: 2022-02-01 14:24+0100\n"
+"Last-Translator: \n"
+"Language-Team: Tom Broucke <tom@tombrouckeBe>\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: otomaties-woocommerce-pdf-gift-card.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: includes/class-admin.php:14
+msgid "Gift Card"
+msgstr "Geschenkgutschein"
+
+#: includes/class-admin.php:24
+msgid "Gift Card Settings"
+msgstr "Geschenkkarte Einstellungen"
+
+#: includes/class-admin.php:27
+msgid "Debug gift card"
+msgstr "Debug Geschenkkarte"
+
+#: includes/class-admin.php:28
+msgid "Check this box if you are designing your gift card. "
+msgstr "Kreuzen Sie dieses Feld an, wenn Sie Ihre Geschenkkarte gestalten"
+
+#: includes/class-admin.php:31
+msgid "Display gift card in browser instead of downloading."
+msgstr "Anzeige der Geschenkkarte im Browser statt Herunterladen."
+
+#: includes/class-fields.php:15
+msgid "Price"
+msgstr "Preis"
+
+#: includes/class-fields.php:16
+msgctxt "label"
+msgid "Price"
+msgstr "Preis"
+
+#: includes/class-fields.php:25
+msgid "Your name"
+msgstr "Ihr Name"
+
+#: includes/class-fields.php:26
+msgctxt "label"
+msgid "Your name"
+msgstr "Ihr Name"
+
+#: includes/class-fields.php:34
+msgid "Recipient name"
+msgstr "Name des Empfängers"
+
+#: includes/class-fields.php:35
+msgctxt "label"
+msgid "Recipient name"
+msgstr "Name des Empfängers"
+
+#: includes/class-fields.php:43
+msgid "Message"
+msgstr "Nachricht"
+
+#: includes/class-fields.php:44
+msgctxt "label"
+msgid "Message"
+msgstr "Nachricht"
+
+#: includes/class-fields.php:145
+#, php-format
+msgid "%s is required."
+msgstr "%s ist erforderlich."
+
+#: includes/class-fields.php:151
+#, php-format
+msgid "The minimum price for %s is %s"
+msgstr "Der Mindestpreis für %s ist %s"
+
+#: includes/class-gift-card-pdf.php:37
+msgid "gift_card"
+msgstr "gift_card"
+
+#: includes/class-gift-card-pdf.php:114
+#, php-format
+msgid "Valid untill %s"
+msgstr "Gültig bis %s"
+
+#: includes/class-handle-checkout.php:80
+msgid "Dear,"
+msgstr "Lieber,"
+
+#: includes/class-handle-checkout.php:81
+msgid "Your gift card is attached to this e-mail."
+msgstr "Ihre Geschenkkarte ist dieser E-Mail beigefügt."
+
+#: includes/class-handle-checkout.php:81
+msgid "Your gift cards are attached to this e-mail."
+msgstr "Ihre Geschenkkarten sind dieser E-Mail beigefügt."
+
+#: includes/class-handle-checkout.php:82
+msgid "Kind regards,"
+msgstr "Mit freundlichen Grüßen"
+
+#: includes/class-handle-checkout.php:85
+msgid "Your gift card"
+msgstr "Ihr Geschenkgutschein"
+
+#: includes/class-handle-checkout.php:85
+msgid "Your gift cards"
+msgstr "Ihre Geschenkkarten"
+
+#: includes/class-order.php:51
+msgid "Coupon"
+msgstr "Gutschein"
+
+#: includes/class-order.php:52
+msgid "Mailed"
+msgstr "Versendet"
+
+#: includes/class-order.php:53 includes/class-product-gift-card.php:60
+msgid "Expiration date"
+msgstr "Ablaufdatum"
+
+#: includes/class-order.php:87
+msgid "Download gift card"
+msgstr "Geschenkkarte herunterladen"
+
+#: includes/class-product-gift-card-variable.php:20
+#: includes/class-product-gift-card.php:18
+msgid "Choose"
+msgstr "Auswählen"
+
+#: includes/class-product-gift-card-variable.php:20
+#: includes/class-product-gift-card.php:18
+msgid "Read more"
+msgstr "Weiterlesen"
+
+#: includes/class-product-gift-card.php:55
+msgid "Minimum price"
+msgstr "Mindestpreis"
+
+#: includes/class-product-gift-card.php:57
+msgid "Leave this field blank to disable price input."
+msgstr "Lassen Sie dieses Feld leer, um die Preiseingabe zu deaktivieren."
+
+#: includes/class-product-gift-card.php:62
+msgid "None"
+msgstr "Nichts"
+
+#: includes/class-product-gift-card.php:63
+msgid "6 months"
+msgstr "6 Monate"
+
+#: includes/class-product-gift-card.php:64
+msgid "1 Year"
+msgstr "1 Jahr"
+
+#: includes/class-product-gift-card.php:65
+msgid "1.5 Year"
+msgstr "1.5 Jahr"
+
+#: includes/class-product-gift-card.php:66
+msgid "2 Years"
+msgstr "zwei Jahre"
+
+#: includes/class-product-gift-card.php:67
+msgid "2.5 Years"
+msgstr "2.5 Jahre"
+
+#: includes/class-product-gift-card.php:69
+msgid "Gift card expires in ..."
+msgstr "Geschenkkarte verfällt in ..."
+
+#: otomaties-woocommerce-pdf-gift-card.php:76
+msgid "Gift card"
+msgstr "Geschenkgutschein"
+
+#: otomaties-woocommerce-pdf-gift-card.php:77
+msgid "Variable Gift card"
+msgstr "Variable Geschenkkarte"
+
+#. Plugin Name of the plugin/theme
+msgid "Woocommerce PDF Gift Card"
+msgstr "Woocommerce PDF-Geschenkkarte"
+
+#. Description of the plugin/theme
+msgid "Sell PDF gift cards through WooCommerce with a custom design."
+msgstr "Verkaufen Sie PDF-Geschenkkarten über WooCommerce mit einem individuellen Design."
+
+#. Author of the plugin/theme
+msgid "Tom Broucke"
+msgstr "Tom Broucke"
+
+#. Author URI of the plugin/theme
+msgid "https://tombroucke.be"
+msgstr "https://tombroucke.be"
