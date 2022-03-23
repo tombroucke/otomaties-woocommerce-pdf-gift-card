@@ -1,3 +1,5 @@
+import 'jquery-validation';
+
 jQuery(document).ready(function($){
 	$('input[name="_gc_price"]').change(function(){
 		calculate_totals();
@@ -16,4 +18,11 @@ jQuery(document).ready(function($){
 		$('.woocommerce-Price-amount', '.single-product .summary').html('<span class="woocommerce-Price-currencySymbol">€</span>' + total.toFixed(2).replace('.',','));
 	}
 	calculate_totals();
+
+	$('.product-type-gift_card form.cart').validate({
+		ignore: ".qty"
+	});
+	if(typeof pdf_gift_card_vars !== 'undefined' && pdf_gift_card_vars.translation_file) {
+		$.getScript(pdf_gift_card_vars.translation_file);
+	}
 })

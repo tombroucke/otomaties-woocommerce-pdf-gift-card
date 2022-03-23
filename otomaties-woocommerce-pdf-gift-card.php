@@ -39,6 +39,7 @@ class Gift_Card_Controller
 			include 'vendor/autoload.php';
 		}
 
+		include 'includes/class-assets.php';
 		include 'includes/class-admin.php';
 		include 'includes/class-custom-price.php';
 		include 'includes/class-field.php';
@@ -46,6 +47,7 @@ class Gift_Card_Controller
 		include 'includes/class-gift-card.php';
 		include 'includes/class-gift-card-pdf.php';
 		include 'includes/class-gift-card-product.php';
+		include 'includes/class-json-manifest.php';
 		include 'includes/class-handle-checkout.php';
 		include 'includes/class-order.php';
 		include 'includes/class-product-gift-card.php';
@@ -68,7 +70,14 @@ class Gift_Card_Controller
 	}
 
 	public function enqueue_scripts(){
-		wp_enqueue_script( 'otomaties-wc-giftcard', plugins_url( 'assets/woocommerce-pdf-gift-card.js', __FILE__ ) );
+		wp_enqueue_script( 'otomaties-wc-giftcard', Assets::find('js/main.js') );
+		$lang = substr(get_locale(), 0, 2);
+		$messagesFile = Assets::find('js/messages_' . $lang . '.js');
+		if ($messagesFile) {
+			wp_localize_script( 'otomaties-wc-giftcard', 'pdf_gift_card_vars', [
+				'translation_file' => $messagesFile
+			] );
+		}
 	}
 
 	public function add_custom_products($types)
