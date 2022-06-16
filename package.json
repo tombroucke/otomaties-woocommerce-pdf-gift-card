@@ -10,7 +10,7 @@
   "author": "Tom Broucke <tom@tombroucke.be>",
   "license": "MIT",
   "dependencies": {
-    "jquery-validation": "^1.19.3",
+    "jquery-validation": "^1.19.4",
     "stylelint": "^14.0.1"
   },
   "devDependencies": {
