@@ -22,7 +22,7 @@ const main = async (err) => {
 	});
 
 	function calculateTotals(price) {
-		const summary = document.querySelector('.product-type-gift_card .product-summary .woocommerce-Price-amount');
+		const summary = document.querySelector('[class*="product-type-gift_card"]').querySelector('.product-summary .woocommerce-Price-amount');
 		if(isNaN(price)) {
 			price = 0;
 		}
@@ -33,7 +33,7 @@ const main = async (err) => {
 		}
 	}
 
-	const cartForm = document.querySelector('.product-type-gift_card form.cart');
+	const cartForm = document.querySelector('[class*="product-type-gift_card"]').querySelector('.form.cart');
 	if (cartForm) {
 		var polyglot = new Polyglot();
 		polyglot.extend({
