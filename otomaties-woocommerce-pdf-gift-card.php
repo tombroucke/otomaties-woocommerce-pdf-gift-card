@@ -51,7 +51,6 @@ class Gift_Card_Controller
         include 'includes/class-gift-card.php';
         include 'includes/class-gift-card-pdf.php';
         include 'includes/class-gift-card-product.php';
-        include 'includes/class-json-manifest.php';
         include 'includes/class-handle-checkout.php';
         include 'includes/class-order.php';
         include 'includes/class-product-gift-card.php';
