@@ -19,7 +19,7 @@ class WC_Custom_Gift_Card_PDF {
 				'unit' => 'mm',
 				'width' => 210,
 				'height' => 100,
-				'template' => __DIR__ . '/../assets/gift_card.pdf',
+				'template' => __DIR__ . '/../public/static/gift_card.pdf',
 			),
 			$gift_card
 		);

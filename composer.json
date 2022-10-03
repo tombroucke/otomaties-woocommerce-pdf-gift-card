@@ -9,8 +9,15 @@
         }
     ],
     "require": {
+        "php": "^8.0",
         "composer/installers": "^2.0",
         "setasign/fpdf": "^1.8",
-        "setasign/fpdi": "^2.1"
+        "setasign/fpdi": "^2.1",
+        "illuminate/support": "^9.33"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
     }
 }
