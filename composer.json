@@ -19,5 +19,14 @@
         "allow-plugins": {
             "composer/installers": true
         }
+    },
+    "require-dev": {
+        "szepeviktor/phpstan-wordpress": "^1.1",
+        "php-stubs/woocommerce-stubs": "^6.9"
+    },
+    "scripts": {
+        "test": [
+            "vendor/bin/phpstan analyze includes otomaties-woocommerce-pdf-gift-card.php --memory-limit 512M"
+        ]
     }
 }

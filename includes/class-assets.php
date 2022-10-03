@@ -22,17 +22,18 @@ class Assets
         $this->entryPointsPath = plugin_dir_path(dirname(__FILE__)) . 'public/entrypoints.json';
         $this->publicUrl = plugin_dir_url(dirname(__FILE__)) . 'public/';
     }
+
     /**
- * Get manifest.
- *
- * @return {Collection}
- */
+     * Get manifest.
+     *
+     * @return Collection
+     */
     private function getManifest(): Collection
     {
         $path = realpath($this->entryPointsPath);
         
         if (!$path) {
-            throw new \WP_Error('Run yarn build');
+            throw new \Exception('Run yarn build');
         }
 
         return Collection::make(
@@ -47,11 +48,11 @@ class Assets
     /**
      * Do entrypoint.
      *
-     * @param  {string} name
-     * @param  {string} type
-     * @param  {object} entrypoint
+     * @param string $name
+     * @param string $type
+     * @param object $entrypoint
      *
-     * @return {Collection}
+     * @return Collection
      */
     public function entrypoint(
         string $name,
@@ -91,8 +92,8 @@ class Assets
     /**
      * Enqueue all assets from a bundle key.
      *
-     * @param  {string} bundleName
-     * @return void
+     * @param string $bundleName
+     * @return Assets
      */
     public function bundle(string $bundleName)
     {

@@ -1,0 +1,15 @@
+#$ vendor/bin/phpstan analyze
+
+includes:
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
+parameters:
+    level: 5
+    inferPrivatePropertyTypeFromConstructor: true
+    paths:
+        - inc/
+    bootstrapFiles:
+        - %rootDir%/../../php-stubs/woocommerce-stubs/woocommerce-stubs.php
+    ignoreErrors:
+        - '#Call to an undefined method WC_Order_Item::+[a-zA-Z0-9\\_]+\(\)#'
+
+# See full example in phpstan-full.neon
