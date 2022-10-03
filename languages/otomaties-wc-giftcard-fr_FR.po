@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Woocommerce PDF Gift Card\n"
-"POT-Creation-Date: 2020-10-02 17:21+0200\n"
-"PO-Revision-Date: 2020-10-02 17:21+0200\n"
+"POT-Creation-Date: 2022-10-03 11:57+0200\n"
+"PO-Revision-Date: 2022-10-03 11:58+0200\n"
 "Last-Translator: Tom Broucke <tom@tombrouckeBe>\n"
 "Language-Team: Tom Broucke <tom@tombrouckeBe>\n"
 "Language: fr_FR\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 3.1.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: otomaties-woocommerce-pdf-gift-card.php\n"
@@ -91,32 +91,32 @@ msgstr "Le prix minimum pour %s est %s"
 msgid "gift_card"
 msgstr "carte_cadeau"
 
-#: includes/class-gift-card-pdf.php:114
+#: includes/class-gift-card-pdf.php:116
 #, php-format
 msgid "Valid untill %s"
 msgstr "Valide jusqu’à le %s"
 
-#: includes/class-handle-checkout.php:80
+#: includes/class-handle-checkout.php:87
 msgid "Dear,"
 msgstr "Cher,"
 
-#: includes/class-handle-checkout.php:81
+#: includes/class-handle-checkout.php:88
 msgid "Your gift card is attached to this e-mail."
 msgstr "Votre carte-cadeau est jointe à cet e-mail."
 
-#: includes/class-handle-checkout.php:81
+#: includes/class-handle-checkout.php:88
 msgid "Your gift cards are attached to this e-mail."
 msgstr "Vos cartes-cadeaux sont jointes à cet e-mail."
 
-#: includes/class-handle-checkout.php:82
+#: includes/class-handle-checkout.php:89
 msgid "Kind regards,"
 msgstr "Sincères salutations."
 
-#: includes/class-handle-checkout.php:85
+#: includes/class-handle-checkout.php:92
 msgid "Your gift card"
 msgstr "Votre carte cadeau"
 
-#: includes/class-handle-checkout.php:85
+#: includes/class-handle-checkout.php:92
 msgid "Your gift cards"
 msgstr "Vos cartes-cadeaux"
 
@@ -132,7 +132,7 @@ msgstr "Envoyé"
 msgid "Expiration date"
 msgstr "Date d’expiration"
 
-#: includes/class-order.php:87
+#: includes/class-order.php:92
 msgid "Download gift card"
 msgstr "Télécharger carte-cadeau"
 
@@ -182,11 +182,23 @@ msgstr "2.5 ans"
 msgid "Gift card expires in ..."
 msgstr "Carte-cadeau expire en ..."
 
-#: otomaties-woocommerce-pdf-gift-card.php:76
+#: otomaties-woocommerce-pdf-gift-card.php:82
+msgid "This field is required"
+msgstr "Ce champ est requis"
+
+#: otomaties-woocommerce-pdf-gift-card.php:83
+msgid "Please enter a valid e-mailaddress"
+msgstr "Veuillez entrer une adresse e-mail valide"
+
+#: otomaties-woocommerce-pdf-gift-card.php:84
+msgid "Please select an option"
+msgstr "Veuillez sélectionner une option"
+
+#: otomaties-woocommerce-pdf-gift-card.php:91
 msgid "Gift card"
 msgstr "Carte cadeau"
 
-#: otomaties-woocommerce-pdf-gift-card.php:77
+#: otomaties-woocommerce-pdf-gift-card.php:92
 msgid "Variable Gift card"
 msgstr "Carte-cadeau variable"
 
