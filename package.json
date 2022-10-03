@@ -12,7 +12,7 @@
   "dependencies": {
     "@roots/sage": "^6.4.4",
     "@tombroucke/otomaties-form-validator": "^1.0.4",
-    "jquery-validation": "^1.19.3",
+    "jquery-validation": "^1.19.5",
     "node-polyglot": "^2.4.2",
     "stylelint": "^14.0.1"
   },
