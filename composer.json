@@ -26,7 +26,7 @@
     },
     "scripts": {
         "test": [
-            "vendor/bin/phpstan analyze includes otomaties-woocommerce-pdf-gift-card.php --memory-limit 512M"
+            "vendor/bin/phpstan analyze includes otomaties-woocommerce-pdf-gift-card.php --memory-limit 1024M"
         ]
     }
 }
