@@ -1544,10 +1544,10 @@
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.24.44.tgz#0a0aa3bf4a155a678418527342a3ee84bd8caa5c"
   integrity sha512-ka0W0KN5i6LfrSocduwliMMpqVgohtPFidKdMEOUjoOFCHcOOYkKsPRxfs5f15oPNHTm6ERAm0GV/+/LTKeiWg==
 
-"@tombroucke/otomaties-form-validator@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@tombroucke/otomaties-form-validator/-/otomaties-form-validator-1.0.4.tgz#8bac0311c5c4d82c1176bc269dc6f14a20c86ada"
-  integrity sha512-6gYrpez3Be8AyeMg7Wv5Ba6agC9N0YNHpdIdou+GjMA2C1H0H79hfkEDKMzqkqZbC1BxDtFvZlf6RKN1bgymUA==
+"@tombroucke/otomaties-form-validator@^1.0.5":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@tombroucke/otomaties-form-validator/-/otomaties-form-validator-1.0.6.tgz#688f4a2f35307471224f1d5090013d219c846ea0"
+  integrity sha512-Wkb5Fm8fynTn3N8Ze/wdKy8nbV3jLso6hcTn5BZuSrwVyrzR+AKBdPw2b5kR9zkO9OP6HOEk/1Zsy+jrPT2e5A==
   dependencies:
     validator "^13.7.0"
 
