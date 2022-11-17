@@ -17,9 +17,11 @@ const main = async (err) => {
 	const priceInput = document.querySelector('input[name="_gc_price"]');
 
 	// calculate totals on priceInput change
-	priceInput.addEventListener('change', (e) => {
-		calculateTotals(parseFloat(e.target.value));
-	});
+	if(priceInput) {
+		priceInput.addEventListener('change', (e) => {
+			calculateTotals(parseFloat(e.target.value));
+		});
+	}
 
 	function calculateTotals(price) {
 		const summary = document.querySelector('[class*="product-type-gift_card"]').querySelector('.product-summary .woocommerce-Price-amount');
@@ -33,7 +35,7 @@ const main = async (err) => {
 		}
 	}
 
-	const cartForm = document.querySelector('[class*="product-type-gift_card"]').querySelector('.form.cart');
+	const cartForm = document.querySelector('[class*="product-type-gift_card"]').querySelector('form.cart');
 	if (cartForm) {
 		var polyglot = new Polyglot();
 		polyglot.extend({

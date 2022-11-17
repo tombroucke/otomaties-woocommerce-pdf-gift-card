@@ -75,14 +75,19 @@ class Gift_Card_Controller
 
     public function enqueue_scripts()
     {
-        $assets = new Assets();
-        $assets->bundle('app')->enqueue()->localize('gift_card_vars', [
-            'strings' => [
-                'fieldRequired' => __('This field is required', 'otomaties-wc-giftcard'),
-                'validEmail' => __('Please enter a valid e-mailaddress', 'otomaties-wc-giftcard'),
-                'selectOption' => __('Please select an option', 'otomaties-wc-giftcard'),
-            ]
-        ]);
+        if (is_singular('product')) {
+            $product = wc_get_product(get_the_ID());
+            if ($product->is_type('gift_card') || $product->is_type('gift_card_variable')) {
+                $assets = new Assets();
+                $assets->bundle('app')->enqueue()->localize('gift_card_vars', [
+                    'strings' => [
+                        'fieldRequired' => __('This field is required', 'otomaties-wc-giftcard'),
+                        'validEmail' => __('Please enter a valid e-mailaddress', 'otomaties-wc-giftcard'),
+                        'selectOption' => __('Please select an option', 'otomaties-wc-giftcard'),
+                    ]
+                ]);
+            }
+        }
     }
 
     public function add_custom_products($types)
