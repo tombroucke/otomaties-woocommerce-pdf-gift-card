@@ -121,6 +121,9 @@ class WC_Custom_Gift_Card_Fields
                     $output .= sprintf('<textarea class="form-control input-text" name="%s" id="" cols="30" rows="6" placeholder="%s%s" maxlength="%s" %s>%s</textarea>', $key, $field['placeholder'], ( $field['required'] ? ' *' : '' ), $field['maxlength'], ( $field['required'] ? 'required' : '' ), $field['value']);
                     break;
             }
+            if (isset($field['instructions'])) {
+                $output .= sprintf('<small>%s</small>', $field['instructions']);
+            }
             $output .= '</div>';
         }
         $output .= '</div>';
