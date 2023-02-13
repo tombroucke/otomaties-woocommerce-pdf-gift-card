@@ -18,7 +18,11 @@ class WC_Product_Gift_Card extends \WC_Product_Simple
 
     public function add_to_cart_text()
     {
-        return apply_filters('woocommerce_product_add_to_cart_text', $this->is_purchasable() ? __('Choose', 'otomaties-wc-giftcard') : __('Read more', 'otomaties-wc-giftcard'), $this);
+        return apply_filters(
+            'woocommerce_product_add_to_cart_text',
+            $this->is_purchasable() ? __('Choose', 'otomaties-wc-giftcard') : __('Read more', 'otomaties-wc-giftcard'),
+            $this
+        );
     }
 
     public function add_to_cart_url()
@@ -30,7 +34,7 @@ class WC_Product_Gift_Card extends \WC_Product_Simple
         return apply_filters('woocommerce_product_add_to_cart_url', $url, $this);
     }
 
-    public static function admin_custom_js()
+    public static function adminCustomJs()
     {
 
         if ('product' != get_post_type()) {
@@ -53,7 +57,7 @@ class WC_Product_Gift_Card extends \WC_Product_Simple
         <?php
     }
 
-    public static function product_custom_price_field()
+    public static function productCustomPriceField()
     {
         $expiration = get_post_meta(get_the_ID(), 'gc_expiration', true);
         ?>
@@ -77,7 +81,7 @@ class WC_Product_Gift_Card extends \WC_Product_Simple
         <?php
     }
 
-    public static function save_product_custom_price_field($post_id)
+    public static function saveProductCustomPriceField($post_id)
     {
 
         $custom_fields = array(
@@ -96,7 +100,6 @@ class WC_Product_Gift_Card extends \WC_Product_Simple
 
     public static function custom_price($price, $product)
     {
-
         $min_price = get_post_meta($product->get_ID(), 'gc_min_price', true);
         if ($product->get_type() == 'gift_card' && $min_price !== false) {
             if (is_single()) {
@@ -109,6 +112,6 @@ class WC_Product_Gift_Card extends \WC_Product_Simple
     }
 }
 
-add_action('admin_footer', array( 'WC_Product_Gift_Card', 'admin_custom_js' ));
-add_action('woocommerce_product_options_general_product_data', array( 'WC_Product_Gift_Card', 'product_custom_price_field' ));
-add_action('woocommerce_process_product_meta', array( 'WC_Product_Gift_Card', 'save_product_custom_price_field' ));
+add_action('admin_footer', ['WC_Product_Gift_Card', 'adminCustomJs']);
+add_action('woocommerce_product_options_general_product_data', ['WC_Product_Gift_Card', 'productCustomPriceField']);
+add_action('woocommerce_process_product_meta', ['WC_Product_Gift_Card', 'saveProductCustomPriceField']);

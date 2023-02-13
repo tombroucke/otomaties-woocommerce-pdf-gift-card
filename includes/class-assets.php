@@ -1,5 +1,5 @@
 <?php
-namespace Otomaties\WooCommerce\Gift_Card;
+namespace Otomaties\WooCommerce\GiftCard;
 
 use \Illuminate\Support\Collection;
 

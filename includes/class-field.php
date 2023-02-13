@@ -1,14 +1,13 @@
 <?php
-namespace Otomaties\WooCommerce\Gift_Card;
+namespace Otomaties\WooCommerce\GiftCard;
 
-class WC_Custom_Gift_Card_Field implements \ArrayAccess
+class GiftCardField implements \ArrayAccess
 {
 
     private $args;
 
     public function __construct($args)
     {
-
         $defaults = array(
             'identifier' => '',
             'type' => 'text',

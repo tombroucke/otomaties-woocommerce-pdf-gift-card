@@ -1,51 +1,20 @@
 <?php
-namespace Otomaties\WooCommerce\Gift_Card;
+namespace Otomaties\WooCommerce\GiftCard;
 
-class WC_Custom_Gift_Card_Order
+class GiftCardOrder
 {
 
     public function init()
     {
-
-        add_action('admin_init', array( $this, 'download_gift_card' ));
-        add_filter('woocommerce_order_item_display_meta_key', array( $this, 'change_labels' ));
-        add_filter('woocommerce_order_item_display_meta_value', array( $this, 'change_values' ), 10, 3);
-        add_action('woocommerce_after_order_itemmeta', array($this,'download_link'), 10, 3);
-        add_filter('gc_meta_value_gc_message', array( $this, 'format_message' ));
+        add_filter('woocommerce_order_item_display_meta_key', [$this, 'changeLabels']);
+        add_filter('woocommerce_order_item_display_meta_value', [$this, 'changeValues'], 10, 3);
+        add_action('woocommerce_after_order_itemmeta', [$this, 'downloadLink'], 10, 3);
+        add_filter('gc_meta_value_gc_message', [$this, 'formatMessage']);
     }
 
-    public function download_gift_card()
+    public function changeLabels($meta_key)
     {
-
-        $item_id    = filter_input(INPUT_GET, 'download_gift_card', FILTER_VALIDATE_INT);
-        $index      = filter_input(INPUT_GET, 'index', FILTER_VALIDATE_INT);
-        $order_id   = filter_input(INPUT_GET, 'post', FILTER_VALIDATE_INT);
-
-        if ($item_id && current_user_can('manage_woocommerce')) {
-            $order = new \WC_Order($order_id);
-
-            $items = $order->get_items();
-            foreach ($items as $key => $item) {
-                if ($key != $item_id) {
-                    continue;
-                }
-                $gc = new WC_Custom_Gift_Card($item, $index);
-                $pdf = new WC_Custom_Gift_Card_PDF($gc);
-                if (get_option('gc_debug') && get_option('gc_debug') == 'yes') {
-                    $pdf->display();
-                } else {
-                    $pdf->download();
-                }
-                die();
-            }
-        }
-    }
-
-    public function change_labels($meta_key)
-    {
-
-        $fields_obj = new WC_Custom_Gift_Card_Fields();
-        $fields     = $fields_obj->get_fields();
+        $fields = (new GiftCardFields())->getFields();
 
         $other_labels = array(
             '_gc_coupon' => __('Coupon', 'otomaties-wc-giftcard'),
@@ -68,36 +37,51 @@ class WC_Custom_Gift_Card_Order
         return $meta_key;
     }
 
-    public function change_values($display_value, $meta, $order)
+    public function changeValues($display_value, $meta, $order)
     {
 
         if ($meta->key == '_gc_expiration') {
             $display_value = date('d-m-Y', $meta->value);
         } elseif (strpos($meta->key, '_gc_coupon') !== false) {
-            $display_value = sprintf('<a target="_blank" href="%s">%s</a>', get_edit_post_link($meta->value), $meta->value);
+            $display_value = sprintf(
+                '<a target="_blank" href="%s">%s</a>',
+                get_edit_post_link($meta->value),
+                $meta->value
+            );
         }
 
         return $display_value;
     }
 
-    public function download_link($item_id, $item, $product)
+    public function downloadLink($item_id, $item, $product)
     {
         $order = new \WC_Order(get_the_ID());
-        if ($order->get_status() == 'completed' && $item instanceof \WC_Order_Item_Product && wc_get_order_item_meta($item_id, '_gc_price')) {
-            $url = add_query_arg('download_gift_card', $item_id, get_edit_post_link($order->get_ID()));
+        if ($order->get_status() == 'completed' && $item instanceof \WC_Order_Item_Product) {
             for ($i=0; $i < $item->get_quantity(); $i++) {
-                $url = add_query_arg('index', $i, $url);
-                ?>
-                <a class="button button-secondary" href="<?php echo $url; ?>" target="_blank"><?php _e('Download gift card', 'otomaties-wc-giftcard'); ?></a>
-                <?php
+                if (!wc_get_order_item_meta($item_id, '_gc_coupon_' . $i)) {
+                    continue;
+                }
+                $couponId = wc_get_order_item_meta($item_id, '_gc_coupon_' . $i);
+                $url = add_query_arg(
+                    [
+                        'download_gift_card' => true,
+                        'coupon_id' => $couponId,
+                    ],
+                    get_edit_post_link($order->get_ID())
+                );
+                printf(
+                    '<a href="%s" class="button button-secondary" target="_blank">%s</a>',
+                    esc_url($url),
+                    __('Download gift card', 'otomaties-wc-giftcard')
+                );
             }
         }
     }
 
-    public function format_message($value)
+    public function formatMessage($value)
     {
         return wpautop($value);
     }
 }
-$wc_gift_card_order = new WC_Custom_Gift_Card_Order();
-$wc_gift_card_order->init();
+
+(new GiftCardOrder())->init();

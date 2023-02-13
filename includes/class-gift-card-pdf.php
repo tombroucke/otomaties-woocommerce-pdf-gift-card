@@ -1,19 +1,18 @@
 <?php
-namespace Otomaties\WooCommerce\Gift_Card;
+namespace Otomaties\WooCommerce\GiftCard;
 
 use setasign\Fpdi\Fpdi;
 
-class WC_Custom_Gift_Card_PDF
+class GiftCardPDF
 {
 
     private $gift_card;
     private $pdf;
     private $properties;
     private $filepath;
-	private $upload_dir = '';
-	private $filename = '';
+    private $filename = '';
 
-    public function __construct(WC_Custom_Gift_Card $gift_card)
+    public function __construct(GiftCardBase $gift_card)
     {
 
         $this->properties = apply_filters(
@@ -34,33 +33,35 @@ class WC_Custom_Gift_Card_PDF
 
     public function init()
     {
-
         // Set upload dir
         $wp_upload_dir      = wp_upload_dir();
-        $this->upload_dir   = trailingslashit($wp_upload_dir['basedir']) . 'gift_cards/';
-        $this->filename     = __('gift_card', 'otomaties-wc-giftcard') . '-' . $this->gift_card->get_order_id() . '-' . $this->gift_card->get_order_item_id() . '_' . $this->gift_card->index() . '.pdf';
-        if (! file_exists($this->upload_dir)) {
-            mkdir($this->upload_dir, 0755, true);
+        $upload_dir         = trailingslashit($wp_upload_dir['basedir']) . 'gift_cards/';
+        $this->filename     = $this->gift_card->filename();
+        if (! file_exists($upload_dir)) {
+            mkdir($upload_dir, 0755, true);
         }
-        $this->filepath     = $this->upload_dir . $this->filename;
+        $this->filepath     = $upload_dir . $this->filename;
 
         // Set font path
         if (! defined('FPDF_FONTPATH')) {
             define('FPDF_FONTPATH', apply_filters('gc_pdf_fontpath', dirname(__FILE__) . '/../fpdf-fonts'));
         }
-        $this->create_pdf();
+        $this->createPdf();
     }
 
-    private function create_pdf()
+    private function createPdf()
     {
 
-        $this->pdf = new Fpdi($this->properties['orientation'], $this->properties['unit'], array( $this->properties['width'], $this->properties['height'] ));
+        $this->pdf = new Fpdi(
+            $this->properties['orientation'],
+            $this->properties['unit'],
+            array( $this->properties['width'], $this->properties['height'] )
+        );
         $this->pdf->AddFont('Lato', '', 'Lato-Regular.php');
         $this->pdf->AddFont('Lato', 'B', 'Lato-Bold.php');
         $this->pdf->SetAutoPageBreak(false, 0);
 
         do_action('gc_pdf_before_pdf', $this->pdf);
-
         $pagecount = $this->pdf->setSourceFile($this->properties['template']);
         for ($pageNo = 1; $pageNo <= $pagecount; $pageNo++) {
             $tplIdx = $this->pdf->importPage($pageNo);
@@ -91,7 +92,11 @@ class WC_Custom_Gift_Card_PDF
                     'fields' => array(
                         'amount' => array(
                             'font' => array( 'Lato', 'B', 25 ),
-                            'value' => str_replace(',00', '', html_entity_decode(wp_strip_all_tags(wc_price($this->gift_card->get_amount_incl_tax())))),
+                            'value' => str_replace(
+                                ',00',
+                                '',
+                                html_entity_decode(wp_strip_all_tags(wc_price($this->gift_card->amount())))
+                            ),
                             'color' => array( 209, 32, 39 ),
                         ),
                     ),
@@ -101,14 +106,18 @@ class WC_Custom_Gift_Card_PDF
                     'y' => 48,
                     'fields' => array(
                         'sender' => array(
-                            'value' => $this->gift_card->get_sender(),
+                            'value' => $this->gift_card->sender(),
                         ),
                         'recipient' => array(
-                            'value' => $this->gift_card->get_recipient(),
+                            'value' => $this->gift_card->recipient(),
                             'margin_top' => 2.7,
                         ),
                         'message' => array(
-                            'value' => preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $this->gift_card->get_message()),
+                            'value' => preg_replace(
+                                "/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/",
+                                "\n",
+                                $this->gift_card->message()
+                            ),
                             'margin_top' => 2.7,
                         ),
                     ),
@@ -118,16 +127,19 @@ class WC_Custom_Gift_Card_PDF
                     'y' => 88,
                     'fields' => array(
                         'valid_untill' => array(
-                            'value' => sprintf(__('Valid untill %s', 'otomaties-wc-giftcard'), date('d/m/Y', $this->gift_card->get_expiration())),
+                            'value' => $this->gift_card->expiration() ?  sprintf(
+                                __('Valid untill %s', 'otomaties-wc-giftcard'),
+                                date('d/m/Y', $this->gift_card->expiration())
+                            ) : '',
                             'font' => array( 'Lato', '', 8 ),
                         ),
                     ),
                 ),
             );
 
-            if (apply_filters('gc_create_coupon', true, $this->gift_card->get_order_item())) {
+            if (apply_filters('gc_create_coupon', true, $this->gift_card->item())) {
                 $pdf_fields['content']['fields']['coupon'] = array(
-                    'value' => get_the_title($this->gift_card->get_coupon()),
+                    'value' => $this->gift_card->couponCode(),
                     'margin_top' => 2.7,
                 );
             }
@@ -147,7 +159,13 @@ class WC_Custom_Gift_Card_PDF
                     call_user_func_array(array( $this->pdf, 'SetTextColor' ), $field['color']);
                     call_user_func_array(array( $this->pdf, 'SetFont' ), $field['font']);
 
-                    $this->pdf->MultiCell($field['width'], $field['height'], iconv('UTF-8', 'windows-1252', $field['value']), $field['border'], $field['align']);
+                    $this->pdf->MultiCell(
+                        $field['width'],
+                        $field['height'],
+                        iconv('UTF-8', 'windows-1252', $field['value']),
+                        $field['border'],
+                        $field['align']
+                    );
                 }
             }
         }

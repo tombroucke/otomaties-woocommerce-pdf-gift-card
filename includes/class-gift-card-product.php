@@ -1,25 +1,25 @@
 <?php
-namespace Otomaties\WooCommerce\Gift_Card;
+namespace Otomaties\WooCommerce\GiftCard;
 
-class WC_Gift_Card_Product
+class GiftCardProduct
 {
 
     public function init()
     {
-        add_filter('woocommerce_product_supports', array( $this, 'remove_ajax_button' ), 10, 3);
-        add_filter('woocommerce_is_virtual', array( $this, 'virtual_gift_card' ), 10, 2);
+        add_filter('woocommerce_product_supports', array( $this, 'removeAjaxButton' ), 10, 3);
+        add_filter('woocommerce_is_virtual', array( $this, 'virtualGiftCard' ), 10, 2);
     }
 
-    public function remove_ajax_button($supports, $feature, $product)
+    public function removeAjaxButton($supports, $feature, $product)
     {
 
-        if (in_array($product->get_type(), Gift_Card_Controller::gift_card_products()) && $feature == 'ajax_add_to_cart') {
+        if (in_array($product->get_type(), GiftCardController::giftCardProducts()) && $feature == 'ajax_add_to_cart') {
             return false;
         }
         return $supports;
     }
 
-    public function virtual_gift_card($virtual, $product)
+    public function virtualGiftCard($virtual, $product)
     {
         if (apply_filters('gc_virtual_gift_card', true) && ( $product->get_type() == 'gift_card' || $product->get_type() == 'gift_card_variable' )) {
             return true;
@@ -28,5 +28,4 @@ class WC_Gift_Card_Product
     }
 }
 
-$wc_gift_card_product = new WC_Gift_Card_Product();
-$wc_gift_card_product->init();
+(new GiftCardProduct())->init();

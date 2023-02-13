@@ -1,14 +1,12 @@
 <?php
 class WC_Product_Gift_Card_Variable extends \WC_Product_Variable
 {
-
     protected $product_type = 'gift_card_variable';
 
-    protected $supports = array();
+    protected $supports = [];
 
     public function __construct($product)
     {
-
         add_action('woocommerce_gift_card_variable_add_to_cart', 'woocommerce_variable_add_to_cart', 30);
         parent::__construct($product);
         $this->product_type = 'gift_card_variable';
@@ -22,7 +20,11 @@ class WC_Product_Gift_Card_Variable extends \WC_Product_Variable
 
     public function add_to_cart_text()
     {
-        return apply_filters('woocommerce_product_add_to_cart_text', $this->is_purchasable() ? __('Choose', 'otomaties-wc-giftcard') : __('Read more', 'otomaties-wc-giftcard'), $this);
+        return apply_filters(
+            'woocommerce_product_add_to_cart_text',
+            $this->is_purchasable() ? __('Choose', 'otomaties-wc-giftcard') : __('Read more', 'otomaties-wc-giftcard'),
+            $this
+        );
     }
 
     public function add_to_cart_url()
@@ -45,7 +47,7 @@ class WC_Product_Gift_Card_Variable extends \WC_Product_Variable
         return true;
     }
 
-    public static function admin_custom_js()
+    public static function adminCustomJs()
     {
 
         if ('product' != get_post_type()) {
@@ -72,4 +74,4 @@ class WC_Product_Gift_Card_Variable extends \WC_Product_Variable
     }
 }
 
-add_action('admin_footer', array( 'WC_Product_Gift_Card_Variable', 'admin_custom_js' ));
+add_action('admin_footer', ['WC_Product_Gift_Card_Variable', 'adminCustomJs']);

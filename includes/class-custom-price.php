@@ -1,15 +1,15 @@
 <?php
-namespace Otomaties\WooCommerce\Gift_Card;
+namespace Otomaties\WooCommerce\GiftCard;
 
-class WC_Custom_Gift_Card_Custom_Price
+class GiftCardCustomPrice
 {
 
     public function init()
     {
-        add_action('woocommerce_before_calculate_totals', array( $this, 'add_custom_price' ));
+        add_action('woocommerce_before_calculate_totals', array( $this, 'customPrice' ));
     }
 
-    public function add_custom_price($cart_object)
+    public function customPrice($cart_object)
     {
         foreach ($cart_object->cart_contents as $key => $cart_item) {
             if (isset($cart_item['_gc_price'])) {
@@ -18,5 +18,5 @@ class WC_Custom_Gift_Card_Custom_Price
         }
     }
 }
-$wc_gift_card_custom_price = new WC_Custom_Gift_Card_Custom_Price();
-$wc_gift_card_custom_price->init();
+
+(new GiftCardCustomPrice())->init();
