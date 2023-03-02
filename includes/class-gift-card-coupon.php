@@ -52,7 +52,7 @@ class GiftCardCoupon implements GiftCardBase
         if (!$amount) {
             $this->legacyGet('amount');
         }
-        return $this->coupon->get_amount();
+        return $this->coupon->get_amount() ?? 0;
     }
 
     public function sender() : string
@@ -61,7 +61,7 @@ class GiftCardCoupon implements GiftCardBase
         if (!$sender) {
             $sender = $this->legacyGet('_gc_sender');
         }
-        return $sender;
+        return $sender ?? '';
     }
 
     public function recipient() : string
@@ -70,7 +70,7 @@ class GiftCardCoupon implements GiftCardBase
         if (!$recipient) {
             $recipient = $this->legacyGet('_gc_recipient');
         }
-        return $recipient;
+        return $recipient ?? '';
     }
 
     public function message() : string
@@ -79,7 +79,7 @@ class GiftCardCoupon implements GiftCardBase
         if (!$message) {
             $message = $this->legacyGet('_gc_message');
         }
-        return $message;
+        return $message ?? '';
     }
 
     public function couponCode(): string
@@ -111,6 +111,6 @@ class GiftCardCoupon implements GiftCardBase
         if (!$this->orderItem) {
             $this->orderItem = $this->orderItem();
         }
-        return wc_get_order_item_meta($this->orderItem->get_ID(), $key, true);
+        return $this->orderItem ? wc_get_order_item_meta($this->orderItem->get_ID(), $key, true) : null;
     }
 }
