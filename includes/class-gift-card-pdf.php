@@ -51,7 +51,7 @@ class GiftCardPDF
 
     private function createPdf()
     {
-
+        ray($this->gift_card->expiration());
         $this->pdf = new Fpdi(
             $this->properties['orientation'],
             $this->properties['unit'],
@@ -96,7 +96,7 @@ class GiftCardPDF
                                 ',00',
                                 '',
                                 html_entity_decode(wp_strip_all_tags(wc_price($this->gift_card->amount())))
-                            ),
+                            ), 
                             'color' => array( 209, 32, 39 ),
                         ),
                     ),
@@ -129,7 +129,7 @@ class GiftCardPDF
                         'valid_untill' => array(
                             'value' => $this->gift_card->expiration() ?  sprintf(
                                 __('Valid untill %s', 'otomaties-wc-giftcard'),
-                                date('d/m/Y', $this->gift_card->expiration())
+                                $this->gift_card->expiration()->format('d/m/Y')
                             ) : '',
                             'font' => array( 'Lato', '', 8 ),
                         ),

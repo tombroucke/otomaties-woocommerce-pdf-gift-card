@@ -36,7 +36,7 @@ class GiftCardCoupon implements GiftCardBase
         return new GiftCardPDF($this);
     }
 
-    public function expiration() : ?string
+    public function expiration() : ?\DateTime
     {
         return $this->coupon->get_date_expires();
     }

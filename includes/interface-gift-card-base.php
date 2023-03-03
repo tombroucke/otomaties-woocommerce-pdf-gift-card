@@ -4,7 +4,7 @@ namespace Otomaties\WooCommerce\GiftCard;
 interface GiftCardBase {
     public function pdf();
 
-    public function expiration() : ?string;
+    public function expiration() : ?\DateTime;
 
     public function filename() : string;
 
