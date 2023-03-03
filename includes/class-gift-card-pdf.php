@@ -51,7 +51,6 @@ class GiftCardPDF
 
     private function createPdf()
     {
-        ray($this->gift_card->expiration());
         $this->pdf = new Fpdi(
             $this->properties['orientation'],
             $this->properties['unit'],
