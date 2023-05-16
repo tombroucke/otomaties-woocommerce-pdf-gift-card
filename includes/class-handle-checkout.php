@@ -75,7 +75,7 @@ class GiftCardHandleCheckout
                     update_post_meta($new_coupon_id, 'individual_use', 'no');
                     update_post_meta($new_coupon_id, 'product_ids', '');
                     update_post_meta($new_coupon_id, 'exclude_product_ids', '');
-                    update_post_meta($new_coupon_id, 'usage_limit', '-1'); // Needs to be -1, so it can be used in multiple orders
+                    update_post_meta($new_coupon_id, 'usage_limit', apply_filters('gc_usage_limit', '-1'));
                     update_post_meta($new_coupon_id, 'date_expires', wc_get_order_item_meta($key, '_gc_expiration', true));
                     update_post_meta($new_coupon_id, 'apply_before_tax', 'yes');
                     update_post_meta($new_coupon_id, 'free_shipping', 'no');
@@ -123,7 +123,7 @@ class GiftCardHandleCheckout
     {
         $gc = get_post_meta($coupon->get_ID(), '_gc', true);
         if ($gc) {
-            $value = false;
+            $value = apply_filters('gc_usage_limit', false);
         }
         return $value;
     }
