@@ -13,7 +13,7 @@
         "composer/installers": "^2.0",
         "setasign/fpdf": "^1.8",
         "setasign/fpdi": "^2.1",
-        "illuminate/support": "^9.33"
+        "illuminate/support": "^9.33 || ^10.0"
     },
     "config": {
         "allow-plugins": {
