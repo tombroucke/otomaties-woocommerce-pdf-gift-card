@@ -123,7 +123,7 @@ class GiftCardAdmin
         $coupon->update_meta_data('_gc', true);
         $fields = new GiftCardFields();
         foreach ($fields->getFields() as $field) {
-            if (isset($_POST[$field['identifier']]) && !empty($_POST[$field['identifier']])) {
+            if (isset($_POST[$field['identifier']])) {
                 $coupon->update_meta_data($field['identifier'], wc_clean($_POST[$field['identifier']]));
             }
         }
