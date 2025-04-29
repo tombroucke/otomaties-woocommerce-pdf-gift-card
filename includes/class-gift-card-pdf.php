@@ -105,17 +105,17 @@ class GiftCardPDF
                     'y' => 48,
                     'fields' => array(
                         'sender' => array(
-                            'value' => $this->gift_card->sender(),
+                            'value' => wp_unslash($this->gift_card->sender()),
                         ),
                         'recipient' => array(
-                            'value' => $this->gift_card->recipient(),
+                            'value' => wp_unslash($this->gift_card->recipient()),
                             'margin_top' => 2.7,
                         ),
                         'message' => array(
                             'value' => preg_replace(
                                 "/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/",
                                 "\n",
-                                $this->gift_card->message()
+                                wp_unslash($this->gift_card->message())
                             ),
                             'margin_top' => 2.7,
                         ),

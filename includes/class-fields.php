@@ -206,7 +206,7 @@ class GiftCardFields
                 }
                 $item_data[] = array(
                     'key'     => $field['label'],
-                    'value'   => $value,
+                    'value'   => wp_unslash($value),
                     'display' => '',
                 );
             }

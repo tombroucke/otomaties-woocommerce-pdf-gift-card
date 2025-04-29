@@ -99,7 +99,7 @@ class GiftCardAdmin
                     'label'             => $field['label'],
                     'placeholder'       => $field['placeholder'],
                     'description'       => $field['instructions'],
-                    'value'             => $coupon->get_meta($field['identifier']),
+                    'value'             => wp_unslash($coupon->get_meta($field['identifier'])),
                     'desc_tip'          => true,
                     'type'              => 'text',
                     'class'             => '',
