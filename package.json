@@ -9,7 +9,7 @@
   "author": "Tom Broucke <tom@tombroucke.be>",
   "license": "MIT",
   "dependencies": {
-    "@roots/sage": "^6.4.4",
+    "@roots/sage": "^6.6.7",
     "@tombroucke/otomaties-form-validator": "^1.0.4",
     "node-polyglot": "^2.4.2",
     "stylelint": "^14.0.1"
