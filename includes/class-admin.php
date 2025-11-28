@@ -18,6 +18,8 @@ class GiftCardAdmin
         add_action('woocommerce_coupon_data_panels', array( $this, 'giftCartCouponDataPanel'), 10, 2);
         add_action('woocommerce_coupon_options_save', array($this, 'saveGiftCartCouponDataPanel'), 10, 2);
 
+        add_filter('manage_shop_coupon_posts_custom_column', array($this, 'addGiftCardIcon'), 10, 2);
+
         // Print gift card from coupon
         add_action('add_meta_boxes', array($this, 'addGiftCardMetaBox'));
     }
@@ -72,8 +74,13 @@ class GiftCardAdmin
         return $settings;
     }
 
-    public function giftCardCouponDataTabs($couponDataTabs)
+    public function giftCardCouponDataTabs($couponDataTabs) : array
     {
+        $coupon = new \WC_Coupon(get_the_ID());
+        if (get_post_type(get_the_ID()) != 'shop_coupon' || !$this->isGiftCard($coupon)) {
+            return $couponDataTabs;
+        }
+
         $couponDataTabs['gift_card'] = array(
             'label'  => __('Gift Card', 'otomaties-wc-giftcard'),
             'target' => 'gift_card_coupon_data',
@@ -86,6 +93,7 @@ class GiftCardAdmin
     {
         echo '<div id="gift_card_coupon_data" class="panel woocommerce_options_panel">';
         $fields = new GiftCardFields();
+        
         foreach ($fields->getFields() as $field) {
             $inputFunction = 'woocommerce_wp_text_input';
             switch ($field['type']) {
@@ -132,7 +140,8 @@ class GiftCardAdmin
 
     public function addGiftCardMetaBox()
     {
-        if (get_post_type(get_the_ID()) != 'shop_coupon' || !get_post_meta(get_the_ID(), '_gc', true)) {
+        $coupon = new \WC_Coupon(get_the_ID());
+        if (get_post_type(get_the_ID()) != 'shop_coupon' || !$this->isGiftCard($coupon)) {
             return;
         }
 
@@ -144,6 +153,21 @@ class GiftCardAdmin
             'side',
             'high'
         );
+    }
+
+    public function addGiftCardIcon($column, $postId)
+    {
+        if ($column !== 'type') {
+            return;
+        }
+
+        $coupon = new \WC_Coupon($postId);
+        if ($this->isGiftCard($coupon)) {
+            echo '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" height="1.2em">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
+</svg>
+';
+        }
     }
 
     public function giftCardMetaBoxContent($coupon)
@@ -161,6 +185,11 @@ class GiftCardAdmin
             esc_url($url),
             __('Download gift card', 'otomaties-wc-giftcard')
         );
+    }
+
+    private function isGiftCard(\WC_Coupon $coupon)  
+    {
+        return $coupon->get_meta('_gc') ? true : false;
     }
 }
 

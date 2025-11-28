@@ -87,7 +87,12 @@ class GiftCardCoupon implements GiftCardBase
         return $this->coupon->get_code();
     }
 
-    private function orderItem()
+    public function order()
+    {
+        return $this->orderItem()?->get_order();
+    }
+
+    public function orderItem()
     {
         global $wpdb;
         $meta_value = $this->coupon->get_ID();
