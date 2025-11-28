@@ -113,8 +113,6 @@ class GiftCardCoupon implements GiftCardBase
 
     /**
      * Our legacy coupons don't have the meta data stored in the coupon object, but in the order item.
-     *
-     * @return void
      */
     private function legacyGet(string $key): mixed
     {
