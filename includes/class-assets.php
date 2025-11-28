@@ -1,38 +1,36 @@
 <?php
+
 namespace Otomaties\WooCommerce\GiftCard;
 
-use \Illuminate\Support\Collection;
+use Illuminate\Support\Collection;
 
 /**
  * Fired during plugin activation.
  *
  * This class defines all code necessary to run during the plugin's activation.
- *
  */
-
 class Assets
 {
-
     private $entryPointsPath = '';
+
     private $publicUrl = '';
+
     private $bundle = null;
 
     public function __construct()
     {
-        $this->entryPointsPath = plugin_dir_path(dirname(__FILE__)) . 'public/entrypoints.json';
-        $this->publicUrl = plugin_dir_url(dirname(__FILE__)) . 'public/';
+        $this->entryPointsPath = plugin_dir_path(dirname(__FILE__)).'public/entrypoints.json';
+        $this->publicUrl = plugin_dir_url(dirname(__FILE__)).'public/';
     }
 
     /**
      * Get manifest.
-     *
-     * @return Collection
      */
     private function getManifest(): Collection
     {
         $path = realpath($this->entryPointsPath);
-        
-        if (!$path) {
+
+        if (! $path) {
             throw new \Exception('Run yarn build');
         }
 
@@ -47,17 +45,11 @@ class Assets
 
     /**
      * Do entrypoint.
-     *
-     * @param string $name
-     * @param string $type
-     * @param object $entrypoint
-     *
-     * @return Collection
      */
     public function entrypoint(
         string $name,
         string $type,
-        Object $entrypoint
+        object $entrypoint
     ): Collection {
         $entrypoint->modules = Collection::make(
             $entrypoint->$type
@@ -81,9 +73,9 @@ class Assets
                 $entrypoint->dependencies->push($name);
 
                 return (object) [
-                'name' => $name,
-                'uri' => $this->publicUrl . $module,
-                'deps' => $dependencies,
+                    'name' => $name,
+                    'uri' => $this->publicUrl.$module,
+                    'deps' => $dependencies,
                 ];
             }
         );
@@ -92,7 +84,6 @@ class Assets
     /**
      * Enqueue all assets from a bundle key.
      *
-     * @param string $bundleName
      * @return Assets
      */
     public function bundle(string $bundleName)
@@ -115,6 +106,7 @@ class Assets
             if (property_exists($item, 'css')) {
                 $entries['css'] = $this->entrypoint($name, 'css', $item);
             }
+
             return (object) $entries;
         };
 
@@ -126,12 +118,12 @@ class Assets
         /**
          * Filter for requested bundle
          */
-        ->filter($filterBundle)
+            ->filter($filterBundle)
 
         /**
          * Prepare entrypoints
          */
-        ->map($prepEntry);
+            ->map($prepEntry);
 
         return $this;
     }
@@ -139,6 +131,7 @@ class Assets
     public function enqueue()
     {
         $this->enqueueCss()->enqueueJs();
+
         return $this;
     }
 
@@ -149,9 +142,8 @@ class Assets
          * Filter out HMR assets
          */
         $filterHot = function ($entry): bool {
-            return !strpos($entry->uri, 'hot-update');
+            return ! strpos($entry->uri, 'hot-update');
         };
-
 
         $this->bundle->each(function ($entrypoint) use ($filterHot): void {
             if (property_exists($entrypoint, 'js')) {
@@ -180,7 +172,7 @@ class Assets
          * Filter out HMR assets
          */
         $filterHot = function ($entry): bool {
-            return !strpos($entry->uri, 'hot-update');
+            return ! strpos($entry->uri, 'hot-update');
         };
 
         $this->bundle->each(function ($entrypoint) use ($filterHot): void {
@@ -201,7 +193,7 @@ class Assets
 
         return $this;
     }
-    
+
     public function localize($name, $object)
     {
 
@@ -209,7 +201,7 @@ class Assets
          * Filter out HMR assets
          */
         $filterHot = function ($entry): bool {
-            return !strpos($entry->uri, 'hot-update');
+            return ! strpos($entry->uri, 'hot-update');
         };
 
         $this->bundle->each(function ($entrypoint) use ($filterHot, $name, $object): void {
@@ -218,7 +210,7 @@ class Assets
                     ->js
                     ->filter($filterHot)
                     ->last();
-                
+
                 if ($script) {
                     wp_localize_script($script->name, $name, $object);
                 }

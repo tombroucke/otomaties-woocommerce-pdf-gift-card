@@ -32,13 +32,14 @@ class WC_Product_Gift_Card_Variable extends \WC_Product_Variable
         $url = $this->is_purchasable() ? remove_query_arg(
             'added-to-cart',
             add_query_arg(
-                array(
+                [
                     'variation_id' => $this->get_id(),
-                    'add-to-cart'  => $this->get_parent_id(),
-                ),
+                    'add-to-cart' => $this->get_parent_id(),
+                ],
                 $this->get_permalink()
             )
         ) : $this->get_permalink();
+
         return apply_filters('woocommerce_product_add_to_cart_url', $url, $this);
     }
 
@@ -50,7 +51,7 @@ class WC_Product_Gift_Card_Variable extends \WC_Product_Variable
     public static function adminCustomJs()
     {
 
-        if ('product' != get_post_type()) {
+        if (get_post_type() != 'product') {
             return;
         }
         ?>

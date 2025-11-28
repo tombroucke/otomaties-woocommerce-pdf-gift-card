@@ -1,7 +1,6 @@
 <?php
 class WC_Product_Gift_Card extends \WC_Product_Simple
 {
-
     protected $product_type = 'gift_card';
 
     public function __construct($product)
@@ -31,13 +30,14 @@ class WC_Product_Gift_Card extends \WC_Product_Simple
             'added-to-cart',
             $this->get_permalink()
         ) : $this->get_permalink();
+
         return apply_filters('woocommerce_product_add_to_cart_url', $url, $this);
     }
 
     public static function adminCustomJs()
     {
 
-        if ('product' != get_post_type()) {
+        if (get_post_type() != 'product') {
             return;
         }
         ?>
@@ -69,12 +69,12 @@ class WC_Product_Gift_Card extends \WC_Product_Simple
         <p class=" form-field gc_expiration_field show_if_gift_card show_if_gift_card_variable">
             <label for="gc_expiration"><?php _e('Expiration date', 'otomaties-wc-giftcard') ?></label>
             <select style="" id="gc_expiration" name="gc_expiration" class="select short">
-                <option value="none" <?php echo ( $expiration == 'none' || !$expiration ? 'selected' : '' ); ?>><?php _e('None', 'otomaties-wc-giftcard'); ?></option>
-                <option value="6_months" <?php echo ( $expiration == '6_months' ? 'selected' : '' ); ?>><?php _e('6 months', 'otomaties-wc-giftcard'); ?></option>
-                <option value="1_year" <?php echo ( $expiration == '1_year' ? 'selected' : '' ); ?>><?php _e('1 Year', 'otomaties-wc-giftcard'); ?></option>
-                <option value="1_5_year" <?php echo ( $expiration == '1_5_year' ? 'selected' : '' ); ?>><?php _e('1.5 Year', 'otomaties-wc-giftcard'); ?></option>
-                <option value="2_years" <?php echo ( $expiration == '2_years' ? 'selected' : '' ); ?>><?php _e('2 Years', 'otomaties-wc-giftcard'); ?></option>
-                <option value="2_5_years" <?php echo ( $expiration == '2_5_years' ? 'selected' : '' ); ?>><?php _e('2.5 Years', 'otomaties-wc-giftcard'); ?></option>
+                <option value="none" <?php echo  $expiration == 'none' || ! $expiration ? 'selected' : ''; ?>><?php _e('None', 'otomaties-wc-giftcard'); ?></option>
+                <option value="6_months" <?php echo  $expiration == '6_months' ? 'selected' : ''; ?>><?php _e('6 months', 'otomaties-wc-giftcard'); ?></option>
+                <option value="1_year" <?php echo  $expiration == '1_year' ? 'selected' : ''; ?>><?php _e('1 Year', 'otomaties-wc-giftcard'); ?></option>
+                <option value="1_5_year" <?php echo  $expiration == '1_5_year' ? 'selected' : ''; ?>><?php _e('1.5 Year', 'otomaties-wc-giftcard'); ?></option>
+                <option value="2_years" <?php echo  $expiration == '2_years' ? 'selected' : ''; ?>><?php _e('2 Years', 'otomaties-wc-giftcard'); ?></option>
+                <option value="2_5_years" <?php echo  $expiration == '2_5_years' ? 'selected' : ''; ?>><?php _e('2.5 Years', 'otomaties-wc-giftcard'); ?></option>
             </select>
             <span class="description"><?php _e('Gift card expires in ...', 'otomaties-wc-giftcard'); ?></span>
         </p>
@@ -84,10 +84,10 @@ class WC_Product_Gift_Card extends \WC_Product_Simple
     public static function saveProductCustomPriceField($post_id)
     {
 
-        $custom_fields = array(
+        $custom_fields = [
             'gc_min_price',
-            'gc_expiration'
-        );
+            'gc_expiration',
+        ];
 
         foreach ($custom_fields as $key => $custom_field) {
             if (isset($_POST[$custom_field])) {
@@ -108,6 +108,7 @@ class WC_Product_Gift_Card extends \WC_Product_Simple
                 return '';
             }
         }
+
         return $price;
     }
 }

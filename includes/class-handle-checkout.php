@@ -1,20 +1,20 @@
 <?php
+
 namespace Otomaties\WooCommerce\GiftCard;
 
 class GiftCardHandleCheckout
 {
-
     public function init()
     {
 
-        add_action('woocommerce_payment_complete_order_status', array( $this, 'autocompletePaidOrder' ), 10, 3);
-        add_action('woocommerce_order_status_completed', array( $this, 'createGiftCard' ), 10);
-        add_filter('woocommerce_coupon_get_usage_limit', array( $this, 'customUsageLimit' ), 10, 2);
-        add_action('woocommerce_order_status_pending', array( $this, 'updateCouponAmount' ));
-        add_action('woocommerce_order_status_completed', array( $this, 'updateCouponAmount' ));
-        add_action('woocommerce_order_status_processing', array( $this, 'updateCouponAmount' ));
-        add_action('woocommerce_order_status_on-hold', array( $this, 'updateCouponAmount' ));
-        add_action('woocommerce_order_status_cancelled', array( $this, 'updateCouponAmount' ));
+        add_action('woocommerce_payment_complete_order_status', [$this, 'autocompletePaidOrder'], 10, 3);
+        add_action('woocommerce_order_status_completed', [$this, 'createGiftCard'], 10);
+        add_filter('woocommerce_coupon_get_usage_limit', [$this, 'customUsageLimit'], 10, 2);
+        add_action('woocommerce_order_status_pending', [$this, 'updateCouponAmount']);
+        add_action('woocommerce_order_status_completed', [$this, 'updateCouponAmount']);
+        add_action('woocommerce_order_status_processing', [$this, 'updateCouponAmount']);
+        add_action('woocommerce_order_status_on-hold', [$this, 'updateCouponAmount']);
+        add_action('woocommerce_order_status_cancelled', [$this, 'updateCouponAmount']);
     }
 
     public function autocompletePaidOrder($status, $order_id, $order)
@@ -28,14 +28,15 @@ class GiftCardHandleCheckout
                 $autocomplete = false;
             }
         }
+
         return $autocomplete ? apply_filters('gc_autocomplete_gc_orders', 'completed', $status, $order_id, $order) : $status;
     }
 
     public function createGiftCard($order_id)
     {
         $order = wc_get_order($order_id);
-        $files = array();
-        $gift_cards = array();
+        $files = [];
+        $gift_cards = [];
 
         foreach ($order->get_items() as $key => $item) {
             $product_id = $item->get_product_id();
@@ -45,26 +46,26 @@ class GiftCardHandleCheckout
                 continue;
             }
 
-            for ($i=0; $i < $item->get_quantity(); $i++) {
-                if (apply_filters('gc_create_coupon', true, $item) && ! wc_get_order_item_meta($key, '_gc_coupon_' . $i, true)) {
+            for ($i = 0; $i < $item->get_quantity(); $i++) {
+                if (apply_filters('gc_create_coupon', true, $item) && ! wc_get_order_item_meta($key, '_gc_coupon_'.$i, true)) {
                     $coupon_code = apply_filters(
                         'gc_coupon_code',
-                        strtolower(str_pad(substr(wc_get_order_item_meta($key, '_gc_recipient', true), 0, 5), 5, 'X') . '_' . substr(md5(uniqid((string)rand(), true)), 0, 5))
+                        strtolower(str_pad(substr(wc_get_order_item_meta($key, '_gc_recipient', true), 0, 5), 5, 'X').'_'.substr(md5(uniqid((string) rand(), true)), 0, 5))
                     );
-                    $amount = round(( $item->get_total() + $item->get_total_tax() ) / $item->get_quantity(), 2);
+                    $amount = round(($item->get_total() + $item->get_total_tax()) / $item->get_quantity(), 2);
                     $discount_type = 'fixed_cart';
 
-                    $coupon = array(
-                        'post_title'    => $coupon_code,
-                        'post_content'  => '',
-                        'post_status'   => 'publish',
-                        'post_type'     => 'shop_coupon',
-                    );
+                    $coupon = [
+                        'post_title' => $coupon_code,
+                        'post_content' => '',
+                        'post_status' => 'publish',
+                        'post_type' => 'shop_coupon',
+                    ];
 
                     $new_coupon_id = wp_insert_post($coupon);
-                    wc_update_order_item_meta($key, '_gc_coupon_' . $i, (string)$new_coupon_id);
+                    wc_update_order_item_meta($key, '_gc_coupon_'.$i, (string) $new_coupon_id);
 
-                    $fields = new GiftCardFields();
+                    $fields = new GiftCardFields;
                     foreach ($fields->getFields() as $field) {
                         update_post_meta($new_coupon_id, $field['identifier'], wc_get_order_item_meta($key, $field['identifier'], true));
                     }
@@ -93,19 +94,19 @@ class GiftCardHandleCheckout
         }
 
         if (! empty($files) && apply_filters('gc_email_gift_card', true, $order)) {
-            $message = '<p>' . __('Dear,', 'otomaties-wc-giftcard') . '</p>';
-            $message .= '<p>' . _n(__('Your gift card is attached to this e-mail.', 'otomaties-wc-giftcard'), __('Your gift cards are attached to this e-mail.', 'otomaties-wc-giftcard'), count($files), 'otomaties-wc-giftcard') . '</p>';
-            $message .= '<p>' . __('Kind regards,', 'otomaties-wc-giftcard') . '<br />' . apply_filters('gc_email_sender_name', get_bloginfo('name')) . '</p>';
-            add_filter('wp_mail_content_type', array( $this, 'setHtmlContentType' ));
-            add_filter('wp_mail_from_name', array( $this, 'fromName' ));
+            $message = '<p>'.__('Dear,', 'otomaties-wc-giftcard').'</p>';
+            $message .= '<p>'._n(__('Your gift card is attached to this e-mail.', 'otomaties-wc-giftcard'), __('Your gift cards are attached to this e-mail.', 'otomaties-wc-giftcard'), count($files), 'otomaties-wc-giftcard').'</p>';
+            $message .= '<p>'.__('Kind regards,', 'otomaties-wc-giftcard').'<br />'.apply_filters('gc_email_sender_name', get_bloginfo('name')).'</p>';
+            add_filter('wp_mail_content_type', [$this, 'setHtmlContentType']);
+            add_filter('wp_mail_from_name', [$this, 'fromName']);
             $mailed = wp_mail($order->get_billing_email(), _n(__('Your gift card', 'otomaties-wc-giftcard'), __('Your gift cards', 'otomaties-wc-giftcard'), count($files), 'otomaties-wc-giftcard'), apply_filters('gc_email_message', $message), '', $files);
             if ($mailed) {
                 foreach ($gift_cards as $key => $gc) {
                     $gc->set('_gc_mailed', true);
                 }
             }
-            remove_filter('wp_mail_content_type', array( $this, 'setHtmlContentType' ));
-            remove_filter('wp_mail_from_name', array( $this, 'fromName' ));
+            remove_filter('wp_mail_content_type', [$this, 'setHtmlContentType']);
+            remove_filter('wp_mail_from_name', [$this, 'fromName']);
         }
     }
 
@@ -125,6 +126,7 @@ class GiftCardHandleCheckout
         if ($gc) {
             $value = apply_filters('gc_usage_limit', false);
         }
+
         return $value;
     }
 
@@ -133,9 +135,9 @@ class GiftCardHandleCheckout
         $order = wc_get_order($order_id);
         foreach ($order->get_items('coupon') as $coupon_item_id => $coupon_item) {
             $coupon = new \WC_Coupon($coupon_item->get_code());
-            $gc       = get_post_meta($coupon->get_ID(), '_gc', true);
+            $gc = get_post_meta($coupon->get_ID(), '_gc', true);
             $gc_orders = get_post_meta($coupon->get_ID(), '_used_in_order', false);
-            if (!$order->has_status('cancelled') && $gc && !in_array($order_id, $gc_orders)) {
+            if (! $order->has_status('cancelled') && $gc && ! in_array($order_id, $gc_orders)) {
                 $coupon_used = $coupon_item->get_discount() + $coupon_item->get_discount_tax();
                 $coupon->set_amount($coupon->get_amount() - $coupon_used);
                 $coupon->save();
@@ -145,4 +147,4 @@ class GiftCardHandleCheckout
     }
 }
 
-(new GiftCardHandleCheckout())->init();
+(new GiftCardHandleCheckout)->init();

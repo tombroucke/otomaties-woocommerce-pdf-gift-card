@@ -1,9 +1,9 @@
 <?php
+
 namespace Otomaties\WooCommerce\GiftCard;
 
 class GiftCardOrder
 {
-
     public function init()
     {
         add_filter('woocommerce_order_item_display_meta_key', [$this, 'changeLabels']);
@@ -14,16 +14,16 @@ class GiftCardOrder
 
     public function changeLabels($meta_key)
     {
-        $fields = (new GiftCardFields())->getFields();
+        $fields = (new GiftCardFields)->getFields();
 
-        $other_labels = array(
+        $other_labels = [
             '_gc_coupon' => __('Coupon', 'otomaties-wc-giftcard'),
             '_gc_mailed' => __('Mailed', 'otomaties-wc-giftcard'),
-            '_gc_expiration' => __('Expiration date', 'otomaties-wc-giftcard')
-        );
+            '_gc_expiration' => __('Expiration date', 'otomaties-wc-giftcard'),
+        ];
 
         foreach ($other_labels as $key => $label) {
-            $fields[$key] = array( 'label' => $label );
+            $fields[$key] = ['label' => $label];
         }
 
         if (isset($fields[$meta_key]) && isset($fields[$meta_key]['label'])) {
@@ -57,11 +57,11 @@ class GiftCardOrder
     {
         $order = new \WC_Order(get_the_ID());
         if ($order->get_status() == 'completed' && $item instanceof \WC_Order_Item_Product) {
-            for ($i=0; $i < $item->get_quantity(); $i++) {
-                if (!wc_get_order_item_meta($item_id, '_gc_coupon_' . $i)) {
+            for ($i = 0; $i < $item->get_quantity(); $i++) {
+                if (! wc_get_order_item_meta($item_id, '_gc_coupon_'.$i)) {
                     continue;
                 }
-                $couponId = wc_get_order_item_meta($item_id, '_gc_coupon_' . $i);
+                $couponId = wc_get_order_item_meta($item_id, '_gc_coupon_'.$i);
                 $url = add_query_arg(
                     [
                         'download_gift_card' => true,
@@ -84,4 +84,4 @@ class GiftCardOrder
     }
 }
 
-(new GiftCardOrder())->init();
+(new GiftCardOrder)->init();

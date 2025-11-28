@@ -1,12 +1,12 @@
 <?php
+
 namespace Otomaties\WooCommerce\GiftCard;
 
 class GiftCardCustomPrice
 {
-
     public function init()
     {
-        add_action('woocommerce_before_calculate_totals', array( $this, 'customPrice' ));
+        add_action('woocommerce_before_calculate_totals', [$this, 'customPrice']);
     }
 
     public function customPrice($cart_object)
@@ -19,4 +19,4 @@ class GiftCardCustomPrice
     }
 }
 
-(new GiftCardCustomPrice())->init();
+(new GiftCardCustomPrice)->init();
