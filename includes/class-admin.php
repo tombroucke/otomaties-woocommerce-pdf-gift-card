@@ -79,7 +79,7 @@ class GiftCardAdmin
     public function giftCardCouponDataTabs($couponDataTabs): array
     {
         $coupon = new \WC_Coupon(get_the_ID());
-        if (get_post_type(get_the_ID()) != 'shop_coupon' || ! $this->isGiftCard($coupon)) {
+        if (apply_filters('gc_hide_coupon_boxes', true) && (get_post_type(get_the_ID()) != 'shop_coupon' || ! $this->isGiftCard($coupon))) {
             return $couponDataTabs;
         }
 
@@ -144,7 +144,7 @@ class GiftCardAdmin
     public function addGiftCardMetaBox()
     {
         $coupon = new \WC_Coupon(get_the_ID());
-        if (get_post_type(get_the_ID()) != 'shop_coupon' || ! $this->isGiftCard($coupon)) {
+        if (apply_filters('gc_hide_coupon_boxes', true) && (get_post_type(get_the_ID()) != 'shop_coupon' || ! $this->isGiftCard($coupon))) {
             return;
         }
 
