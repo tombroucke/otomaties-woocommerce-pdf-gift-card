@@ -22,6 +22,7 @@ class GiftCardAdmin
 
         // Print gift card from coupon
         add_action('add_meta_boxes', [$this, 'addGiftCardMetaBox']);
+        add_action('add_meta_boxes', [$this, 'addOrderMetaBox']);
     }
 
     public function downloadGiftCard()
@@ -158,6 +159,23 @@ class GiftCardAdmin
         );
     }
 
+    public function addOrderMetaBox()
+    {
+        $coupon = new \WC_Coupon(get_the_ID());
+        if ((get_post_type(get_the_ID()) != 'shop_coupon' || ! $this->isGiftCard($coupon))) {
+            return;
+        }
+
+        add_meta_box(
+            'gift_card_order',
+            __('Order', 'otomaties-wc-giftcard'),
+            [$this, 'giftCardOrderMetaBoxContent'],
+            'shop_coupon',
+            'side',
+            'high'
+        );
+    }
+
     public function addGiftCardIcon($column, $postId)
     {
         if ($column !== 'type') {
@@ -188,6 +206,26 @@ class GiftCardAdmin
             esc_url($url),
             __('Download gift card', 'otomaties-wc-giftcard')
         );
+    }
+
+    public function giftCardOrderMetaBoxContent($coupon)
+    {
+        $coupon = new GiftCardCoupon($coupon->ID);
+        $order = $coupon->order();
+
+        if ($order) {
+            printf(
+                '<p>%s</p>',
+                sprintf(__('This gift card was ordered by %s in order #%s', 'otomaties-wc-giftcard'), $order->get_billing_first_name() . ' ' . $order->get_billing_last_name(), $order->get_id())
+            );
+            printf(
+                '<a href="%s" class="button button-secondary" target="_blank">%s</a>',
+                esc_url(get_edit_post_link($order->get_id())),
+                __('View order', 'otomaties-wc-giftcard')
+            );
+        } else {
+            echo __('No order found', 'otomaties-wc-giftcard');
+        }
     }
 
     private function isGiftCard(\WC_Coupon $coupon)
