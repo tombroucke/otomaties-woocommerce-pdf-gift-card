@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Woocommerce PDF Gift Card\n"
-"POT-Creation-Date: 2022-10-03 11:57+0200\n"
-"PO-Revision-Date: 2022-10-03 11:57+0200\n"
+"POT-Creation-Date: 2026-02-20 13:24+0100\n"
+"PO-Revision-Date: 2026-02-20 13:25+0100\n"
 "Last-Translator: Tom Broucke <tom@tombrouckeBe>\n"
 "Language-Team: Tom Broucke <tom@tombrouckeBe>\n"
 "Language: nl_NL\n"
@@ -10,195 +10,212 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.8\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: woocommerce-pdf-gift-card.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
-"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: includes/class-admin.php:14
+#: includes/class-admin.php:48 includes/class-admin.php:88
+#: includes/class-admin.php:154
 msgid "Gift Card"
 msgstr "Cadeaubon"
 
-#: includes/class-admin.php:24
+#: includes/class-admin.php:58
 msgid "Gift Card Settings"
 msgstr "Cadeaubon Instellingen"
 
-#: includes/class-admin.php:27
+#: includes/class-admin.php:62
 msgid "Debug gift card"
 msgstr "Debuggen"
 
-#: includes/class-admin.php:28
+#: includes/class-admin.php:63
 msgid "Check this box if you are designing your gift card. "
 msgstr "Schakel dit selectievakje in als u uw cadeaubon ontwerpt."
 
-#: includes/class-admin.php:31
+#: includes/class-admin.php:66
 msgid "Display gift card in browser instead of downloading."
 msgstr "Geef cadeaubon weer in de browser in plaats van te downloaden."
 
-#: includes/class-fields.php:15
+#: includes/class-admin.php:171
+msgid "Order"
+msgstr "Bestelling"
+
+#: includes/class-admin.php:207 includes/class-order.php:75
+msgid "Download gift card"
+msgstr "Download cadeaubon"
+
+#: includes/class-admin.php:219
+#, php-format
+msgid "This gift card was ordered by %s in order #%s"
+msgstr "Deze cadeaubon werd besteld door %s in bestelling #%s"
+
+#: includes/class-admin.php:224
+msgid "View order"
+msgstr "Bestelling bekijken"
+
+#: includes/class-admin.php:227
+msgid "No order found"
+msgstr "Geen bestelling gevonden"
+
+#: includes/class-fields.php:17
 msgid "Price"
 msgstr "Prijs"
 
-#: includes/class-fields.php:16
+#: includes/class-fields.php:18
 msgctxt "label"
 msgid "Price"
 msgstr "Prijs"
 
-#: includes/class-fields.php:25
+#: includes/class-fields.php:27
 msgid "Your name"
 msgstr "Uw naam"
 
-#: includes/class-fields.php:26
+#: includes/class-fields.php:28
 msgctxt "label"
 msgid "Your name"
 msgstr "Uw naam"
 
-#: includes/class-fields.php:34
+#: includes/class-fields.php:36
 msgid "Recipient name"
 msgstr "Naam ontvanger"
 
-#: includes/class-fields.php:35
+#: includes/class-fields.php:37
 msgctxt "label"
 msgid "Recipient name"
 msgstr "Naam ontvanger"
 
-#: includes/class-fields.php:43
+#: includes/class-fields.php:45
 msgid "Message"
 msgstr "Bericht"
 
-#: includes/class-fields.php:44
+#: includes/class-fields.php:46
 msgctxt "label"
 msgid "Message"
 msgstr "Bericht"
 
-#: includes/class-fields.php:145
+#: includes/class-fields.php:155
 #, php-format
 msgid "%s is required."
 msgstr "%s is verplicht."
 
-#: includes/class-fields.php:151
+#: includes/class-fields.php:161
 #, php-format
 msgid "The minimum price for %s is %s"
 msgstr "De minimumprijs voor %s is %s"
 
-#: includes/class-gift-card-pdf.php:37
+#: includes/class-gift-card-coupon.php:47
 msgid "gift_card"
 msgstr "cadeaubon"
 
-#: includes/class-gift-card-pdf.php:116
+#: includes/class-gift-card-pdf.php:134
 #, php-format
 msgid "Valid untill %s"
 msgstr "Geldig tot %s"
 
-#: includes/class-handle-checkout.php:87
+#: includes/class-handle-checkout.php:97
 msgid "Dear,"
 msgstr "Beste,"
 
-#: includes/class-handle-checkout.php:88
+#: includes/class-handle-checkout.php:98
 msgid "Your gift card is attached to this e-mail."
 msgstr "Uw cadeaubon zit in bijlage bij deze e-mail."
 
-#: includes/class-handle-checkout.php:88
+#: includes/class-handle-checkout.php:98
 msgid "Your gift cards are attached to this e-mail."
 msgstr "Uw cadeaubonnen zitten in bijlage bij deze e-mail."
 
-#: includes/class-handle-checkout.php:89
+#: includes/class-handle-checkout.php:99
 msgid "Kind regards,"
 msgstr "Met vriendelijke groeten,"
 
-#: includes/class-handle-checkout.php:92
+#: includes/class-handle-checkout.php:102
 msgid "Your gift card"
 msgstr "Uw cadeaubon"
 
-#: includes/class-handle-checkout.php:92
+#: includes/class-handle-checkout.php:102
 msgid "Your gift cards"
 msgstr "Uw cadeaubonnen"
 
-#: includes/class-order.php:51
+#: includes/class-order.php:20
 msgid "Coupon"
 msgstr "Kortingsbon"
 
-#: includes/class-order.php:52
+#: includes/class-order.php:21
 msgid "Mailed"
 msgstr "Gemaild"
 
-#: includes/class-order.php:53 includes/class-product-gift-card.php:60
+#: includes/class-order.php:22 includes/class-product-gift-card.php:70
 msgid "Expiration date"
 msgstr "Vervaldatum"
 
-#: includes/class-order.php:92
-msgid "Download gift card"
-msgstr "Download cadeaubon"
-
-#: includes/class-product-gift-card-variable.php:20
-#: includes/class-product-gift-card.php:18
+#: includes/class-product-gift-card-variable.php:25
+#: includes/class-product-gift-card.php:22
 msgid "Choose"
 msgstr "Kies"
 
-#: includes/class-product-gift-card-variable.php:20
-#: includes/class-product-gift-card.php:18
+#: includes/class-product-gift-card-variable.php:25
+#: includes/class-product-gift-card.php:22
 msgid "Read more"
 msgstr "Lees meer"
 
-#: includes/class-product-gift-card.php:55
+#: includes/class-product-gift-card.php:65
 msgid "Minimum price"
 msgstr "Minimumprijs"
 
-#: includes/class-product-gift-card.php:57
+#: includes/class-product-gift-card.php:67
 msgid "Leave this field blank to disable price input."
 msgstr "Laat dit veld leeg om eigen prijsinvoer uit te schakelen."
 
-#: includes/class-product-gift-card.php:62
+#: includes/class-product-gift-card.php:72
 msgid "None"
 msgstr "Geen"
 
-#: includes/class-product-gift-card.php:63
+#: includes/class-product-gift-card.php:73
 msgid "6 months"
 msgstr "6 maanden"
 
-#: includes/class-product-gift-card.php:64
+#: includes/class-product-gift-card.php:74
 msgid "1 Year"
 msgstr "1 jaar"
 
-#: includes/class-product-gift-card.php:65
+#: includes/class-product-gift-card.php:75
 msgid "1.5 Year"
 msgstr "1,5 jaar"
 
-#: includes/class-product-gift-card.php:66
+#: includes/class-product-gift-card.php:76
 msgid "2 Years"
 msgstr "2 jaar"
 
-#: includes/class-product-gift-card.php:67
+#: includes/class-product-gift-card.php:77
 msgid "2.5 Years"
 msgstr "2,5 jaar"
 
-#: includes/class-product-gift-card.php:69
+#: includes/class-product-gift-card.php:79
 msgid "Gift card expires in ..."
 msgstr "Cadeaubon vervalt binnen …"
 
-#: otomaties-woocommerce-pdf-gift-card.php:82
+#: otomaties-woocommerce-pdf-gift-card.php:85
 msgid "This field is required"
 msgstr "Dit veld is verplicht"
 
-#: otomaties-woocommerce-pdf-gift-card.php:83
+#: otomaties-woocommerce-pdf-gift-card.php:86
 msgid "Please enter a valid e-mailaddress"
 msgstr "Gelieve een geldig e-mailadres in te geven"
 
-#: otomaties-woocommerce-pdf-gift-card.php:84
+#: otomaties-woocommerce-pdf-gift-card.php:87
 msgid "Please select an option"
 msgstr "Selecteer a.u.b. een optie"
 
-#: otomaties-woocommerce-pdf-gift-card.php:91
+#: otomaties-woocommerce-pdf-gift-card.php:96
 msgid "Gift card"
 msgstr "Cadeaubon"
 
-#: otomaties-woocommerce-pdf-gift-card.php:92
+#: otomaties-woocommerce-pdf-gift-card.php:97
 msgid "Variable Gift card"
 msgstr "Variabele cadeaubon"
 
