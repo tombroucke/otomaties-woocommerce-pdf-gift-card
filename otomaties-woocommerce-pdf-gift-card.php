@@ -7,7 +7,7 @@
  * Author URI:      https://tombroucke.be
  * Text Domain:     otomaties-wc-giftcard
  * Domain Path:     /languages
- * Version:           3.4.1
+ * Version:           3.4.2
  */
 
 namespace Otomaties\WooCommerce\GiftCard;
