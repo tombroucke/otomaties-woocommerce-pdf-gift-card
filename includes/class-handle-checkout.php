@@ -50,7 +50,7 @@ class GiftCardHandleCheckout
                 if (apply_filters('gc_create_coupon', true, $item) && ! wc_get_order_item_meta($key, '_gc_coupon_'.$i, true)) {
                     $coupon_code = apply_filters(
                         'gc_coupon_code',
-                        strtolower(str_pad(substr(wc_get_order_item_meta($key, '_gc_recipient', true), 0, 5), 5, 'X').'_'.substr(md5(uniqid((string) rand(), true)), 0, 5))
+                        strtolower(str_pad(mb_substr(wc_get_order_item_meta($key, '_gc_recipient', true), 0, 5), 5, 'X').'_'.substr(md5(uniqid((string) rand(), true)), 0, 5))
                     );
                     $amount = round(($item->get_total() + $item->get_total_tax()) / $item->get_quantity(), 2);
                     $discount_type = 'fixed_cart';
